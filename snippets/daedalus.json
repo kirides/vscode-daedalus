@@ -1,0 +1,50 @@
+{
+	"For-Loop": {
+		"prefix": "for",
+		"body": [
+			"var int $1_counter;",
+			"",
+			"func void For$1() {",
+			"\t$1_counter = 0;",
+			"};",
+			"",
+			"func void For$1_Loop() {",
+			"\t// Loop body here:",
+			"\t$0",
+			"",
+			"\t$1_counter = $1_counter + 1;",
+			"\tif ($1_counter < $2) {",
+			"\t\tFor$1_Loop();",
+			"\t};",
+			"};"
+		],
+		"description": "For-Loop"
+	},
+	"While-Loop": {
+		"prefix": "while",
+		"body": [
+			"func void While_$1() {",
+			"\tWhile_$1_Loop();",
+			"};",
+			"",
+			"func void While_$1_Loop() {",
+			"",
+			"\tif ($2) {",
+			"\t\t// Loop body here:",
+			"\t\t$0",
+			"\t\tWhile_$1_Loop();",
+			"\t};",
+			"};"
+		],
+		"description": "While-Loop"
+	},
+	"If-Statement": {
+		"prefix": "if",
+		"body": [
+			"if ($1) {",
+			"\t$0",
+			"};"
+		],
+		"description": "If-Statement"
+	}
+}

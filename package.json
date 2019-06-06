@@ -1,0 +1,62 @@
+{
+    "name": "daedalus",
+    "description": "Daedalus Language Support",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": ">=1.32.0"
+    },
+    "publisher": "Kirides",
+    "activationEvents": [
+        "*"
+    ],
+    "contributes": {
+        "configurationDefaults": {
+            "[visualfoxpro]": {
+                "files.encoding": "windows1252"
+            }
+        },
+        "languages": [
+            {
+                "id": "daedalus",
+                "aliases": [
+                    "Daedalus",
+                    "daedalus"
+                ],
+                "extensions": [
+                    "d"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "daedalus",
+                "scopeName": "source.daedalus",
+                "path": "./syntaxes/daedalus.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "daedalus",
+                "path": "./snippets/daedalus.json"
+            }
+        ]
+    },
+    "main": "./out/extension.js",
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc  -p ./",
+        "lint": "tslint -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/node": "^10.12.18",
+        "tslint": "^5.16.0",
+        "typescript": "^3.4.5",
+        "@types/vscode": "^1.32.0"
+    },
+    "dependencies": {
+        "@types/glob": "^7.1.1",
+        "glob": "^7.1.4"
+    }
+}

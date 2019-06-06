@@ -1,0 +1,44 @@
+Absolutionlevel_BL@Speichert die Anzahl der Straftatabzahlungen im Banditenlager@Wird z.B. dazu benutzt Kämpfe zu beenden, wenn Hero Strafe abbezahlt hat
+Absolutionlevel_OldCamp@Speichert die Anzahl der Straftatabzahlungen in der Burg im Minental@Wird z.B. dazu benutzt Kämpfe zu beenden, wenn Hero Strafe abbezahlt hat
+Absolutionlevel_City@Speichert die Anzahl der Straftatabzahlungen in der Stadt@Wird z.B. dazu benutzt Kämpfe zu beenden, wenn Hero Strafe abbezahlt hat
+Absolutionlevel_Monastery@Speichert die Speichert die Anzahl der Straftatabzahlungen im Kloster@Wird z.B. dazu benutzt Kämpfe zu beenden, wenn Hero Strafe abbezahlt hat
+Absolutionlevel_Farm@Speichert die Speichert die Anzahl der Straftatabzahlungen auf Onars Hof@Wird z.B. dazu benutzt Kämpfe zu beenden, wenn Hero Strafe abbezahlt hat
+Petzcounter_OldCamp_Murder
+Petzcounter_OldCamp_Theft
+Petzcounter_OldCamp_Attack
+Petzcounter_OldCamp_Sheepkiller
+Petzcounter_City_Murder
+Petzcounter_City_Theft
+Petzcounter_City_Attack
+Petzcounter_City_Sheepkiller
+Petzcounter_Monastery_Murder
+Petzcounter_Monastery_Theft
+Petzcounter_Monastery_Attack
+Petzcounter_Monastery_Sheepkiller
+Petzcounter_Farm_Murder
+Petzcounter_Farm_Theft
+Petzcounter_Farm_Attack
+Petzcounter_Farm_Sheepkiller
+Petzcounter_BL_Murder
+Petzcounter_BL_Theft
+Petzcounter_BL_Attack
+Player_SneakerComment@AI_Constants
+Player_LeftRoomComment@AI_Constants
+Player_DrawWeaponComment@AI_Constants
+Player_GetOutOfMyBedComment@AI_Constants
+player_mobsi_production
+player_talent_runes@int[MAX_SPELL]
+player_talent_smith@int[MAX_WEAPONS]
+player_talent_takeanimaltrophy@int[MAX_TROPHIES];
+blood_disabled@C_GILVALUES - int[GIL_MAX2]
+blood_max_distance@C_GILVALUES - int[GIL_MAX2]
+blood_amount@C_GILVALUES - int[GIL_MAX2]
+blood_flow@C_GILVALUES - int[GIL_MAX2]
+blood_emitter@C_GILVALUES - string[GIL_MAX2]
+blood_texture@C_GILVALUES - string[GIL_MAX2]
+fight_range_base@C_GILVALUES - int[GIL_MAX2]
+fight_range_fist@C_GILVALUES - int[GIL_MAX2]
+fight_range_1hs@C_GILVALUES - int[GIL_MAX2]
+fight_range_1ha@C_GILVALUES - int[GIL_MAX2]
+fight_range_2hs@C_GILVALUES - int[GIL_MAX2]
+fight_range_2ha@C_GILVALUES - int[GIL_MAX2]

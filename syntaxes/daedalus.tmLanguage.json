@@ -1,0 +1,186 @@
+{
+    "scopeName": "source.daedalus",
+    "patterns": [
+        { "include": "#type-declarations" },
+        { "include": "#var-def" },
+        { "include": "#func-def" },
+        { "include": "#expression-simple" }
+    ],
+    "repository": {
+        "expression": {
+            "patterns": [
+                { "include": "#comments" },
+                { "include": "#preprocessors" },
+                { "include": "#strings" },
+                { "include": "#constant-num" },
+                { "include": "#constant-bool" },
+                { "include": "#constant-lang" },
+                { "include": "#if" },
+                { "include": "#var-def" },
+                { "include": "#keyword" },
+                { "include": "#functions" },
+                { "include": "#classes" }
+            ]
+        },
+        "expression-simple": {
+            "patterns": [
+                { "include": "#comments" },
+                { "include": "#preprocessors" },
+                { "include": "#strings" },
+                { "include": "#constant-num" },
+                { "include": "#constant-bool" },
+                { "include": "#constant-lang" },
+                { "include": "#var-def" },
+                { "include": "#keyword" },
+                { "include": "#classes" }
+            ]
+        },
+        "preprocessors": {
+            "match": "\\s*^#(?:DEFINE|UNDEF|IF(?:DEF|NDEF)?|ELIF|ENDIF|ELSE|INCLUDE)\\b",
+            "name": "meta.preprocessor"
+        },
+        "constant-num": {
+            "match": "\\b\\d+\\.?\\d*|\\B\\.\\d+",
+            "name": "constant.numeric"
+        },
+        "constant-bool": {
+            "match": "TRUE|FALSE",
+            "name": "constant.numeric"
+        },
+        "constant-lang": {
+            "match": "\\b(?:null|self|hero)\\b",
+            "name": "constant.language"
+        },
+        "comment": {
+            "match": "(?://.*$|/\\*.*\\*/)",
+            "name": "comment"
+        },
+        "comment-block": {
+            "begin": "/\\*",
+            "end": "\\*/",
+            "name": "comment"
+        },
+        "keyword": {
+            "match": "\\b(?:class|const|float|funcref|func|instance|int|other|prototype|return|string|this|var|void|while)\\b",
+            "name": "keyword.control"
+        },
+        "classes": {
+            "match": "(?i)\\b(?:c_npc|c_item)\\b",
+            "name": "entity.name.class"
+        },
+        "strings": {
+            "match": "\".*?\"|'.*?'",
+            "name": "string"
+        },
+        "type-declarations": {
+            "patterns": [
+                { "include": "#instance-declaration" },
+                { "include": "#class-declaration" }
+            ]
+        },
+        "if": {
+            "begin": "\\b(if)\\b",
+            "end": "};",
+            "beginCaptures": {
+                "0": { "name": "entity.statement.if" },
+                "1": { "name": "keyword.control" }
+            },
+            "endCaptures": {
+                "0": { "name": "entity.statement.endif" },
+                "1": { "name": "keyword.control" }
+            },
+            "patterns": [
+                { "include": "#else-if" },
+                { "include": "#else" },
+                { "include": "#expression" }
+            ]
+        },
+        "else-if": {
+            "begin": "(else\\s*if)\\s*\\(",
+            "end": "(?=(};|}))",
+            "beginCaptures": {
+                "0": { "name": "entity.statement.else-if" },
+                "1": { "name": "keyword.control" }
+            },
+            "patterns": [
+                { "include": "#else-if" },
+                { "include": "#else" },
+                { "include": "#expression" }
+            ]
+        },
+        "else": {
+            "begin": "\\b(else)\\s*{",
+            "end": "(?=(};|}))",
+            "beginCaptures": {
+                "0": { "name": "entity.statement.else" },
+                "1": { "name": "keyword.control" }
+            },
+            "patterns": [
+                { "include": "#var-def" },
+                { "include": "#expression" }
+            ]
+        },
+        "class-declaration": {
+            "begin": "(?<=class)\\s+([\\w_]+)(?:\\s*\\(([\\w+_]+)\\))?",
+            "end": "};",
+            "beginCaptures": {
+                "1": { "name": "entity.name.class" },
+                "2": { "name": "entity.name.class" }
+            },
+            "patterns": [
+                { "include": "#var-def" },
+                { "include": "#comments" }
+            ]
+        },
+        "instance-declaration": {
+            "begin": "(?<=prototype|instance)\\s+([\\w_]+)(?:\\s*\\(([\\w+_]+)\\))?",
+            "end": "};",
+            "beginCaptures": {
+                "1": { "name": "entity.name.class" },
+                "2": { "name": "entity.name.class" }
+            },
+            "patterns": [{
+                "include": "#expression"
+            }]
+        },
+        "comments": {
+            "patterns": [
+                { "include": "#comment" },
+                { "include": "#comment-block" }
+            ]
+        },
+        "var-def": {
+            "begin": "(var|const)(?=\\s+\\w+\\s+\\w+)",
+            "beginCaptures": {
+                "0": { "name": "punctuation.definition.variable" },
+                "1": { "name": "keyword.control" }
+            },
+            "end": ",|\\)|;",
+            "patterns": [
+                { "include": "#comment-block" },
+                { "include": "#keyword" },
+                { "include": "#classes" }
+            ]
+        },
+        "func-def": {
+            "begin": "(?i)\\b(func)\\s+(\\w+)(?=\\s+\\w+\\s*\\()",
+            "end": "};",
+            "beginCaptures": {
+                "0": { "name": "entity.function" },
+                "1": { "name": "keyword" },
+                "2": { "name": "keyword" }
+            },
+            "endCaptures": {
+                "0": { "name": "entity.function.end" }
+            },
+            "name": "expression.definition.function",
+            "patterns": [
+                { "include": "#expression" }
+            ]
+        },
+        "functions": {
+            "match": "\\b(?:\\w+)\\b\\s*(?=\\()",
+            "name": "entity.name.function"
+        }
+    }
+}

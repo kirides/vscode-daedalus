@@ -1,0 +1,973 @@
+AF_NONE@Regelt, ob der Kampf gegen Alrik vorbei ist
+AF_RUNNING@Regelt, ob ein Arenakampf gerade stattfindet
+AF_AFTER@Regelt, ob ein Arenakampf vorbei ist
+AF_AFTER_PLUS_DAMAGE@Regelt, ob der Hero nach Arenakampfende noch draufgehauen hat
+AIV_Dist@Wird in Attack verwendet, um zu überprüfen,@ob der Gegner wirklich flieht und nicht doch zurückkommt
+AIV_LastFightAgainstPlayer@Speichert, den Ausgang des letzten Kampfes gegen den Spieler:@FIGHT_NONE@FIGHT_LOST@FIGHT_WON@FIGHT_CANCEL
+AIV_NoFightParker@NPC beteiligt sich nicht an Kämpfen und wird auch nicht angegriffen
+AIV_NpcSawPlayerCommit@NPC merkst sich das Verbrechen des Helden@CRIME_NONE@CRIME_SHEEPKILLER@CRIME_ATTACK@CRIME_THEFT@CRIME_MURDER
+AIV_NpcSawPlayerCommitDay@Der Tag, an dem der NPC den Helden gesehen hat.@(Zur "Verjährung")
+AIV_NpcStartedTalk@Speichert, ob der NPC das Gespräch begonnen hat oder der Held
+AIV_INVINCIBLE@Speichert, ob der NPC gerade in einem Gespräch ist@(wird nicht angegriffen etc)
+AIV_TalkedToPlayer@Speichert, ob der NPC schnonmal mit dem Helden gesprochen hat
+AIV_HitByOtherNpc@Speichert die Anzahl der Treffer von einem neutralen NPC:@ Falls 2 mal getroffen, wird dieser neutrale NPC angegriffen
+AIV_PlayerHasPickedMyPocket@Speichert, ob der NPC schon mal ausgeraubt wurde.
+AIV_LASTTARGET@Speichert das Angriffsziel
+AIV_PursuitEnd@Speichert, ob die Verfolgung abgebrochen wurde
+AIV_ATTACKREASON@Speichert den Grund des Angriffs:@AR_NONE@AR_LeftPortalRoom   Spieler hat (unbefugten) Portalraum verlassen@AR_ClearRoom   Spieler ist unbefugt in meinem Raum@AR_GuardCalledToRoom   Spieler ist unbefugt in fremden Raum@AR_MonsterVsHuman   Monster kämpft gegen Human - ich helfe Human@AR_MonsterMurderedHuman   Monster hat Human getötet@AR_SheepKiller   Schaf wurde angegriffen oder getötet (von Mensch oder Monster)@AR_Theft   Spieler hat Item geklaut@AR_UseMob   Spieler hat an Mob mit Besitzflag rumgefummelt (kann JEDES Mob sein)@AR_GuardCalledToThief   Spieler hat fremdes Item geklaut@AR_ReactToWeapon   Täter hat trotz zweimaliger Warnung Waffe nicht weggesteckt ODER ich fliehe direkt@AR_ReactToDamage   Täter hat mich verletzt@AR_GuardStopsFight   Wache beendet Kampf, greift Täter an@AR_GuardCalledToKill   Wache durch WARN zum Mit-Töten gerufen@AR_GuildEnemy   Gilden-Feind = Mensch oder Monster@AR_HumanMurderedHuman   other hat gemordet@AR_MonsterCloseToGate   GateGuards halten nicht-feindliches Monster auf@AR_GuardStopsIntruder   GateGuards attackieren Eindringling@AR_SuddenEnemyInferno   EnemyOverride Blockierung für mich selbst und alle NPCs im Umkreis aufheben@AR_KILL   Spieler aus Dialog heraus töten (SC hat keine Chance)
+AIV_WarnReason
+AIV_RANSACKED@damit nur EIN NSC einen Body plündert
+AIV_DeathInvGiven@Für Mensch und Monster!
+AIV_Guardpassage_Status@Enthält den Status einer Durchgangswache:@GP_NONE@GP_FirstWarnGiven@GP_SecondWarnGiven
+AIV_LastDistToWP@enthält die letzte ermittelte Distanz zum Referenz-Waypoint (Checkpoint) (wird beim SPIELER gesetzt!)
+AIV_PASSGATE@TRUE = Spieler kann durch, FALSE = Spieler wird aufgehalten
+AIV_PARTYMEMBER@für XP-Vergabe, AUCH für Monster
+AIV_VictoryXPGiven@wenn NSC schonmal besiegt, gibts keine XP mehr für den Spieler (z.B. bei unconscious Humans)
+AIV_Gender@wird zusammen mit Visual über B_SetVisual gesetzt
+AIV_Food
+AIV_TAPOSITION
+AIV_SeenSneaker
+AIV_StoryBandit@Banditen, mit denen gekämpft werden darf
+AIV_StoryBandit_Esteban@Estebans Dreigestirn
+AIV_SummonTime
+AIV_WaitBeforeAttack
+AIV_SUMMON_PRIO
+AIV_LASTBODY@der Body, an dem ich zuletzt gefressen habe
+AIV_MM_ThreatenBeforeAttack
+AIV_MM_DrohRange
+AIV_MM_AttackRange
+AIV_MM_DrohTime
+AIV_MM_FollowTime@wie lange verfolgt einen das Monster@FOLLOWTIME_SHORT@FOLLOWTIME_MEDIUM@FOLLOWTIME_LONG
+AIV_MM_FollowInWater@AUCH für HUMANS! - folgt einem der NSC auch in Wasser?
+AIV_MM_PRIORITY@ist meine Priorität gerade FRESSEN oder KÄMPFEN (immer fressen, es sei denn ich werde getroffen)@PRIO_EAT@PRIO_ATTACK
+AIV_MM_SleepStart
+AIV_MM_SleepEnd
+AIV_MM_RestStart
+AIV_MM_RestEnd
+AIV_MM_RoamStart
+AIV_MM_RoamEnd
+AIV_MM_EatGroundStart
+AIV_MM_EatGroundEnd
+AIV_MM_WuselStart
+AIV_MM_WuselEnd
+AIV_MM_OrcSitStart
+AIV_MM_OrcSitEnd
+AIV_MM_ShrinkState@merkt sich das Schrumpf-Stadium des Monsters, wenn es von einem Shrink-Zauber getroffen wird
+AIV_MM_REAL_ID
+AIV_NPCIsRanger@Der Typ gehört zum 'Ring des Wassers'
+AIV_HasGepetzt
+AIV_CrimeAbsolutionLevel@zusätzlich zur CRIME merken
+AIV_LastPlayerAR@(ZS_Attack)
+AIV_DuelLost@(ZS_Unconscious)
+AIV_TAPOSITION
+AIV_ToughGuy@IGNORIERT Attack-Crime@Jubelt beim Kampf, hat keine News bei Attack (kann über AIV_LastFightAgainstPlayer reagieren)
+AIV_ChapterInv@Trade AIV
+AIV_MM_Packhunter
+AIV_MagicUser
+AIV_DropDeadAndKill
+AIV_FreezeStateTime
+AIV_IGNORE_Murder
+AIV_IGNORE_Theft
+AIV_IGNORE_Attack
+AIV_IGNORE_Sheepkiller
+AIV_IgnoresArmor@Keine Reaktion oder Konsequenzen auf die Rüstung des SC
+AIV_IgnoresFakeGuild
+AIV_MaxDistToWp
+AIV_OriginalFightTactic
+AIV_EnemyOverride
+AIV_NewsOverride@petzen aber nicht labern
+AIV_ToughGuyNewsOverride
+AIV_FollowTime
+AIV_FightDistCancel
+AIV_ArenaFight
+AIV_LastAbsolutionLevel
+AIV_SeenLeftRoom@ist Player-aus-Raum-raus-Kommentar schon abgelassen worden?
+AIV_SeenDrawWeapon
+AIV_DefeatedByPlayer
+AIV_KilledByPlayer
+AIV_StateTime@um mit zwei StateTime-Triggern arbeiten zu können.
+AIV_LastFightComment@Hat der NSC den letzten Kampf kommentiert?
+AIV_LastFightPlayerHelp
+AIV_FollowDist
+ATR_HITPOINTS@Die aktuelle Lebensenergie
+ATR_HITPOINTS_MAX@Die maximale Lebensenergie
+ATR_MANA@Die aktuelle Mana
+ATR_MANA_MAX@Die maximale Mana
+ATR_STRENGTH@Die aktuelle Stärke
+ATR_DEXTERITY@Die aktuelle Stärke
+ATR_REGENERATEHP@Bestimmt, nach wievielen Sekunden ein Lebensenergiepunkt regeneriert wird
+ATR_REGENERATEMANA@Bestimmt, nach wievielen Sekunden ein Manapunkt regeneriert wird
+ATT_ANGRY@Feindliche Einstellung
+ATT_FRIENDLY@Feindliche Einstellung
+ATT_HOSTILE@Feindliche Einstellung
+ATR_INDEX_MAX@Maximale Anzahl der Attribute
+ATT_NEUTRAL@Feindliche Einstellung
+AR_NONE@Kein Angriffsgrund
+AR_GuildEnemy@Gilden-Feind = Mensch oder Monster
+AR_Theft@Spieler hat Item geklaut
+AR_UseMob@Spieler hat an Mob mit Besitzflag rumgefummelt (kann JEDES Mob sein)
+AR_SheepKiller@Schaf wurde angegriffen oder getötet (von Mensch oder Monster)
+AR_HumanMurderedHuman@other hat gemordet
+AR_MonsterMurderedHuman@Monster hat Human getötet
+AR_MonsterVsHuman@Monster kämpft gegen Human - ich helfe Human
+AR_MonsterCloseToGate@GateGuards halten nicht-feindliches Monster auf
+AR_ReactToDamage@Täter hat mich verletzt
+AR_ReactToWeapon@Täter hat trotz zweimaliger Warnung Waffe nicht weggesteckt ODER ich fliehe direkt
+AR_ClearRoom@Spieler ist unbefugt in meinem Raum
+AR_LeftPortalRoom@Spieler hat (unbefugten) Portalraum verlassen
+AR_GuardStopsIntruder@GateGuards attackieren Eindringling
+AR_GuardStopsFight@Wache beendet Kampf, greift Täter an
+AR_GuardCalledToKill@Wache durch WARN zum Mit-Töten gerufen
+AR_GuardCalledToThief@Spieler hat fremdes Item geklaut
+AR_GuardCalledToRoom@Spieler ist unbefugt in fremden Raum
+AR_SuddenEnemyInferno@EnemyOverride Blockierung für mich selbst und alle NPCs im Umkreis aufheben
+AR_KILL@Spieler aus Dialog heraus töten (SC hat keine Chance)
+BLOOD_SIZE_DIVISOR
+BLOOD_DAMAGE_MAX
+BodyTex_P@Pale@B_SetNpcVisual
+BodyTex_N@Normal@B_SetNpcVisual
+BodyTex_L@Latino@B_SetNpcVisual
+BodyTex_B@Black@B_SetNpcVisual
+BodyTexBabe_P@Pale@B_SetNpcVisual
+BodyTexBabe_N@Normal@B_SetNpcVisual
+BodyTexBabe_L@Latino@B_SetNpcVisual
+BodyTexBabe_B@Black@B_SetNpcVisual
+BodyTex_Player@B_SetNpcVisual
+BodyTex_T@tätowierte psionikerhaut@B_SetNpcVisual@(Addon)
+BodyTexBabe_F@Fellkragen Babe@B_SetNpcVisual@(Addon)
+BodyTexBabe_S@das kleine Schwarze@B_SetNpcVisual@(Addon)
+CRIME_NONE
+CRIME_INTRUDER
+CRIME_THEFT
+CRIME_SHEEPKILLER
+CRIME_MURDER
+CRIME_ATTACK
+DAM_INVALID
+DAM_BARRIER
+DAM_BLUNT
+DAM_EDGE
+DAM_FIRE
+DAM_FLY
+DAM_MAGIC
+DAM_POINT
+DAM_FALL
+DAM_INDEX_BARRIER
+DAM_INDEX_BLUNT
+DAM_INDEX_EDGE
+DAM_INDEX_FIRE
+DAM_INDEX_FLY
+DAM_INDEX_MAGIC
+DAM_INDEX_POINT
+DAM_INDEX_FALL
+DAM_INDEX_MAX
+DAM_CRITICAL_MULTIPLIER
+DEFAULT@wird in Monster-Instanzen (SetVisual) verwendet
+Face_N_Gomez 
+Face_N_Scar 
+Face_N_Raven
+Face_N_Bullit
+Face_N_Corristo
+Face_N_Milten
+Face_N_Bloodwyn
+Face_N_YBerion
+Face_N_CoolPock
+Face_N_Xardas
+Face_N_Lares
+Face_N_Drax@Buster
+Face_N_Player
+Face_N_Lee
+Face_N_Torlof
+Face_N_Mud
+Face_N_Ricelord
+Face_N_Horatio
+Face_N_Richter
+Face_N_Cipher_neu
+Face_N_Homer
+Face_N_MadPsi
+Face_N_Bartholo
+Face_N_Snaf
+Face_N_Mordrag
+Face_N_Lefty
+Face_N_Wolf
+Face_N_Fingers
+Face_N_Whistler
+Face_N_Important_Arto
+Face_N_ImportantGrey
+Face_N_ImportantOld
+Face_N_Tough_Lee_ähnlich
+Face_N_Tough_Skip
+Face_N_ToughBart01
+Face_N_Tough_Okyl
+Face_N_Normal01
+Face_N_Normal_Cord
+Face_N_Normal_Olli_Kahn
+Face_N_Normal02
+Face_N_Normal_Spassvogel
+Face_N_Normal03
+Face_N_Normal04
+Face_N_Normal05
+Face_N_Normal_Stone
+Face_N_Normal06
+Face_N_Normal_Erpresser
+Face_N_Normal07
+Face_N_Normal_Blade
+Face_N_Normal08
+Face_N_Normal14
+Face_N_Normal_Sly
+Face_N_Normal16
+Face_N_Normal17
+Face_N_Normal18
+Face_N_Normal19
+Face_N_Normal20
+Face_N_NormalBart01
+Face_N_NormalBart02
+Face_N_NormalBart03
+Face_N_NormalBart04
+Face_N_NormalBart05
+Face_N_NormalBart06
+Face_N_NormalBart_Senyan
+Face_N_NormalBart08
+Face_N_NormalBart09
+Face_N_NormalBart10
+Face_N_NormalBart11
+Face_N_NormalBart12
+Face_N_NormalBart_Dexter
+Face_N_NormalBart_Graham
+Face_N_NormalBart_Dusty
+Face_N_NormalBart16
+Face_N_NormalBart17
+Face_N_NormalBart_Huno
+Face_N_NormalBart_Grim
+Face_N_NormalBart20
+Face_N_NormalBart21
+Face_N_NormalBart22
+Face_N_OldBald_Jeremiah
+Face_N_Weak_Ulbert
+Face_N_Weak_BaalNetbek
+Face_N_Weak_Herek
+Face_N_Weak04
+Face_N_Weak05
+Face_N_Weak_Orry
+Face_N_Weak_Asghan
+Face_N_Weak_Markus_Kark
+Face_N_Weak_Cipher_alt
+Face_N_NormalBart_Swiney
+Face_N_Weak12
+Face_P_Lester
+Face_P_Gilbert
+Face_P_ToughBald
+Face_P_Tough_Drago
+Face_P_Tough_Torrez
+Face_P_Tough_Rodriguez
+Face_P_ToughBald_Nek
+Face_P_NormalBald 
+Face_P_Normal01
+Face_P_Normal02
+Face_P_Normal_Fletcher
+Face_P_Normal03
+Face_P_NormalBart01
+Face_P_NormalBart_Cronos
+Face_P_NormalBart_Nefarius
+Face_P_NormalBart_Riordian
+Face_P_OldMan_Gravo
+Face_P_Weak_Cutter
+Face_P_Weak_Ulf_Wohlers
+Face_L_ToughBald01
+Face_L_Tough01
+Face_L_Tough02
+Face_L_Tough_Santino
+Face_L_ToughBart_Quentin
+Face_L_Normal_GorNaBar
+Face_L_NormalBart01
+Face_L_NormalBart02
+Face_L_NormalBart_Rufus
+Face_L_Ratford
+Face_L_Scatty
+Face_L_Ian
+Face_L_Diego
+Face_L_Jackal
+Face_B_Thorus
+Face_B_CorAngar
+Face_B_Saturas
+Face_B_Cavalorn
+Face_B_Gorn
+Face_B_ToughBald
+Face_B_Tough_Pacho
+Face_B_Tough_Silas
+Face_B_Normal01
+Face_B_Normal_Kirgo
+Face_B_Normal_Sharky
+Face_B_Normal_Orik
+Face_B_Normal_Kharim
+FaceBabe_N_BlackHair
+FaceBabe_N_Blondie
+FaceBabe_N_BlondTattoo
+FaceBabe_N_PinkHair
+FaceBabe_N_HairAndCloth
+FaceBabe_N_WhiteCloth
+FaceBabe_N_GreyCloth
+FaceBabe_N_Brown
+FaceBabe_N_VlkBlonde
+FaceBabe_N_BauBlonde
+FaceBabe_N_YoungBlonde
+FaceBabe_N_OldBlonde
+FaceBabe_N_MidBauBlonde
+FaceBabe_N_OldBrown
+FaceBabe_N_Lilo
+FaceBabe_N_Hure
+FaceBabe_N_Anne
+FaceBabe_B_RedLocks
+FaceBabe_B_RedLocks2
+FaceBabe_L_Charlotte
+FaceBabe_L_Charlotte2
+FaceBabe_P_MidBlonde
+Face_N_Fortuno@(Addon)
+Face_P_Greg@(Addon)
+Face_N_Pirat01@(Addon)
+Face_N_ZombieMud@(Addon)
+FAI_HUMAN_COWARD
+FAI_HUMAN_NORMAL
+FAI_HUMAN_STRONG
+FAI_HUMAN_MASTER
+FAI_HUMAN_RANGED
+FAI_HUMAN_MAGE
+FAI_MONSTER_COWARD@Spielanfang
+FAI_MEATBUG
+FAI_NAILED
+FAI_SHEEP
+FAI_STONEGUARDIAN
+FAI_GOBBO@(Schwarzer)Goblin
+FAI_GOBBO_SKELETON
+FAI_SUMMONED_GOBBO_SKELETON
+FAI_SCAVENGER@Scavenger / Evil Scavenger
+FAI_GARGOYLE
+FAI_GIANT_RAT
+FAI_GIANT_BUG
+FAI_BLOODFLY
+FAI_WARAN@Waran / Feuerwaran
+FAI_WOLF
+FAI_WARG
+FAI_SUMMONED_WOLF
+FAI_MINECRAWLER@Minecrawler / Minecrawler Warrior
+FAI_LURKER
+FAI_SKELETON
+FAI_SUMMONED_SKELETON
+FAI_SKELETON_MAGE
+FAI_ZOMBIE
+FAI_SNAPPER@Snapper / Dragon Snapper
+FAI_SHADOWBEAST
+FAI_SHADOWBEAST_SKELETON
+FAI_HARPY
+FAI_STONEGOLEM
+FAI_FIREGOLEM
+FAI_ICEGOLEM
+FAI_SUMMONED_GOLEM
+FAI_DEMON
+FAI_SUMMONED_DEMON
+FAI_TROLL@Troll / Schwarzer Troll
+FAI_SWAMPSHARK
+FAI_DRAGON@Feuerdrache / Eisdrache / Felsdrache / Sumpfdrache / Untoter Drache
+FAI_MOLERAT@Molerat
+FAI_ORC@Ork-Krieger / Ork-Shamane / Ork-Elite
+FAI_FRIENDLY_ORC
+FAI_UNDEADORC
+FAI_DRACONIAN
+FAI_NAILED
+FALSE
+FIGHT_NONE
+FIGHT_LOST
+FIGHT_WON
+FIGHT_CANCEL
+FIGHT_DIST_MELEE@Bis zu welcher Entfernung Bedrohung durch SC-Waffe
+FIGHT_DIST_RANGED_INNER@Ab welcher Entfernung NK wählen, wenn NSC im FK ist
+FIGHT_DIST_RANGED_OUTER@Ab welcher Entfernung FK wählen, wenn NSC im NK ist oder Waffe zum ersten Mal gezogen wird
+FIGHT_DIST_CANCEL@Bis wann hinterherschiessen, ab welcher Distanz Kampf abbrechen ODER Flucht abbrechen
+FIGHT_DIST_MONSTER_ATTACKRANGE
+FIGHT_DIST_MONSTER_CANCEL
+FMODE_NONE
+FMODE_FIST
+FMODE_MELEE
+FMODE_FAR
+FMODE_MAGIC
+FOLLOWTIME_SHORT
+FOLLOWTIME_MEDIUM
+FOLLOWTIME_LONG
+FOOD_Apple
+FOOD_Cheese
+FOOD_Bacon
+FOOD_Bread
+GIL_NONE
+GIL_HUMAN
+GIL_PAL
+GIL_MIL
+GIL_VLK
+GIL_KDF
+GIL_NOV
+GIL_DJG
+GIL_SLD
+GIL_BAU
+GIL_BDT
+GIL_STRF
+GIL_DMT
+GIL_OUT
+GIL_PIR
+GIL_KDW
+GIL_EMPTY_C
+GIL_EMPTY_D
+GIL_PUBLIC
+GIL_SEPERATOR_HUM
+GIL_MEATBUG
+GIL_SHEEP
+GIL_GOBBO
+GIL_GOBBO_SKELETON
+GIL_SUMMONED_GOBBO_SKELETON
+GIL_SCAVENGER
+GIL_Gargoyle
+GIL_GIANT_RAT
+GIL_GIANT_BUG
+GIL_BLOODFLY
+GIL_WARAN
+GIL_WOLF
+GIL_SUMMONED_WOLF
+GIL_MINECRAWLER
+GIL_LURKER
+GIL_SKELETON_MAGE
+GIL_SKELETON
+GIL_STONEGUARDIAN
+GIL_SUMMONED_SKELETON
+GIL_ZOMBIE
+GIL_SNAPPER
+GIL_SHADOWBEAST
+GIL_SHADOWBEAST_SKELETON
+GIL_HARPY
+GIL_STONEGOLEM
+GIL_FIREGOLEM
+GIL_ICEGOLEM
+GIL_SUMMONED_GOLEM
+GIL_DEMON
+GIL_SUMMONED_DEMON
+GIL_TROLL
+GIL_SWAMPSHARK
+GIL_DRAGON
+GIL_MOLERAT
+GIL_EMPTY_M
+GIL_EMPTY_N
+GIL_EMPTY_O
+GIL_EMPTY_P
+GIL_EMPTY_Q
+GIL_SEPERATOR_ORC
+GIL_ORC
+GIL_FRIENDLY_ORC
+GIL_UNDEADORC
+GIL_DRACONIAN
+GIL_EMPTY_X
+GIL_EMPTY_Y
+GIL_EMPTY_Z
+GIL_MAX
+GP_NONE
+GP_FirstWarnGiven
+GP_SecondWarnGiven
+GP_Attack
+HAI_TIME_UNCONSCIOUS@Zeit in Sekunden, die der SC und NSCs bewußtlos bleiben@(Default = 20)
+HP_PER_LEVEL@Lebenspunkte pro Spieler-Stufe
+ID_MEATBUG
+ID_SHEEP
+ID_STONEGUARDIAN
+ID_Gargoyle
+ID_GOBBO_GREEN
+ID_GOBBO_BLACK
+ID_GOBBO_SKELETON
+ID_SUMMONED_GOBBO_SKELETON
+ID_SCAVENGER
+ID_SCAVENGER_DEMON
+ID_GIANT_RAT
+ID_GIANT_BUG
+ID_BLOODFLY
+ID_WARAN
+ID_FIREWARAN
+ID_WOLF
+ID_WARG
+ID_SUMMONED_WOLF
+ID_MINECRAWLER
+ID_MINECRAWLERWARRIOR
+ID_LURKER
+ID_SKELETON
+ID_SUMMONED_SKELETON
+ID_SKELETON_MAGE
+ID_ZOMBIE
+ID_SNAPPER
+ID_DRAGONSNAPPER
+ID_SHADOWBEAST
+ID_SHADOWBEAST_SKELETON
+ID_HARPY
+ID_STONEGOLEM
+ID_FIREGOLEM
+ID_ICEGOLEM
+ID_SUMMONED_GOLEM
+ID_DEMON
+ID_SUMMONED_DEMON
+ID_DEMON_LORD
+ID_TROLL
+ID_TROLL_BLACK
+ID_SWAMPSHARK
+ID_DRAGON_FIRE
+ID_DRAGON_ICE
+ID_DRAGON_ROCK
+ID_DRAGON_SWAMP
+ID_DRAGON_UNDEAD
+ID_MOLERAT
+ID_ORCWARRIOR
+ID_ORCSHAMAN
+ID_ORCELITE
+ID_UNDEADORCWARRIOR
+ID_DRACONIAN
+important
+INF_TELL
+INF_UNKNOWN
+INV_WEAPON
+INV_ARMOR
+INV_RUNE
+INV_MAGIC
+INV_FOOD
+INV_POTION
+INV_DOC
+INV_MISC
+INV_CAT_MAX
+ISINPOS
+ITEM_KAT_NONE
+ITEM_KAT_NF
+ITEM_KAT_FF
+ITEM_KAT_MUN
+ITEM_KAT_ARMOR
+ITEM_KAT_FOOD
+ITEM_KAT_DOCS
+ITEM_KAT_POTIONS
+ITEM_KAT_LIGHT
+ITEM_KAT_RUNE
+ITEM_KAT_MAGIC
+ITEM_KAT_KEYS
+ITEM_BURN
+ITEM_DROPPED
+ITEM_MISSION
+ITEM_MULTI
+ITEM_TORCH
+ITEM_THROW
+ITEM_SWD
+ITEM_AXE
+ITEM_2HD_SWD
+ITEM_2HD_AXE
+ITEM_BOW
+ITEM_CROSSBOW
+ITEM_AMULET
+ITEM_RING
+LOC_NONE
+LOC_BL
+LOC_OLDCAMP
+LOC_CITY
+LOC_MONASTERY
+LOC_FARM
+LOC_ALL
+LOG_RUNNING
+LOG_SUCCESS
+LOG_FAILED
+LOG_OBSOLETE
+LOG_MISSION
+LOG_NOTE
+LOOP_CONTINUE
+LOOP_END
+LP_PER_LEVEL@Lernpunkte pro Spieler-Stufe
+MAGIC_NEVER
+MAGIC_ALWAYS
+MAX_POTION
+MAX_SPELL
+MAX_WEAPONS
+MOBSI_NONE
+MOBSI_SmithWeapon
+MOBSI_SleepAbit
+MOBSI_MakeRune
+MOBSI_PotionAlchemy
+MOBSI_PRAYIDOL
+MOBSI_PRAYSHRINE
+MOBSI_GOLDHACKEN
+NO_ARMOR@Keine Rüstung
+NOTINPOS_WALK
+NOTINPOS
+NPC_FLAG_GHOST
+NPC_FLAG_IMMORTAL
+NPC_RUN
+NPC_WALK
+NPC_SNEAK
+NPC_ATTACK_FINISH_DISTANCE
+NPC_BURN_TICKS_PER_DAMAGE_POINT
+NPC_DAM_DIVE_TIME
+NPC_SOUND_DROPTAKE
+NPC_SOUND_SPEAK
+NPC_SOUND_STEPS
+NPC_SOUND_THROWCOLL
+NPC_SOUND_DRAWWEAPON
+NPC_SOUND_SCREAM
+NPC_SOUND_FIGHT
+NPC_VOICE_VARIATION_MAX
+NPC_TALENT_UNKNOWN
+NPC_TALENT_1H
+NPC_TALENT_2H
+NPC_TALENT_BOW
+NPC_TALENT_CROSSBOW
+NPC_TALENT_PICKLOCK
+NPC_TALENT_MAGE
+NPC_TALENT_SNEAK
+NPC_TALENT_REGENERATE
+NPC_TALENT_FIREMASTER
+NPC_TALENT_FOREIGNLANGUAGE
+NPC_TALENT_ACROBAT
+NPC_TALENT_PICKPOCKET
+NPC_TALENT_SMITH
+NPC_TALENT_RUNES
+NPC_TALENT_ALCHEMY
+NPC_TALENT_TAKEANIMALTROPHY
+NPC_TALENT_A
+NPC_TALENT_B
+NPC_TALENT_C
+NPC_TALENT_D
+NPC_TALENT_E
+NPC_TALENT_MAX
+NPC_TALENT_WISPDETECTOR
+NPC_MINIMAL_DAMAGE@Untere Genze des Mindestschadens für Menschen (*** und Monster ??? ***)
+NPC_MINIMAL_PERCENT@Mindestschaden wird ermittelt durch X% vom normalen Gesamtschaden (NACH Abzug der Rüstung), wobei NPC_MINIMAL_DAMAGE genommen wird, falls Mindestschaden NACH %-Berechnung kleiner als NPC_MINIMAL_DAMAGE!
+NPC_ANGRY_TIME@Spielsekunden, die die Temp_Att aufrechterhalten wird, bevor sie wieder auf Perm_Att gesetzt wird (gilt für alle At, nicht nur für angry)
+NPC_TIME_FOLLOW@Zeit, die sich das Opfer des NSCs maximal in BS_RUN befinden darf, um noch weiter verfolgt zu werden
+NPCTYPE_AMBIENT
+NPCTYPE_BAUAMBIENT
+NPCTYPE_BAUCITY
+NPCTYPE_BAUFARM
+NPCTYPE_BL_AMBIENT
+NPCTYPE_BL_MAIN
+NPCTYPE_FRIEND
+NPCTYPE_MAIN
+NPCTYPE_OCAMBIENT
+NPCTYPE_OCMAIN
+NPCTYPE_TAL_AMBIENT
+PERC_ASSESSPLAYER
+PERC_ASSESSENEMY
+PERC_ASSESSFIGHTER
+PERC_ASSESSBODY
+PERC_ASSESSITEM
+PERC_ASSESSMURDER
+PERC_ASSESSDEFEAT
+PERC_ASSESSDAMAGE
+PERC_ASSESSOTHERSDAMAGE
+PERC_ASSESSTHREAT
+PERC_ASSESSREMOVEWEAPON
+PERC_OBSERVEINTRUDER
+PERC_ASSESSFIGHTSOUND
+PERC_ASSESSQUIETSOUND
+PERC_ASSESSWARN
+PERC_CATCHTHIEF
+PERC_ASSESSTHEFT
+PERC_ASSESSCALL
+PERC_ASSESSTALK
+PERC_ASSESSGIVENITEM
+PERC_ASSESSFAKEGUILD@wird gesendet, sobald der SC sich verwandelt
+PERC_MOVEMOB
+PERC_MOVENPC
+PERC_DRAWWEAPON
+PERC_OBSERVESUSPECT
+PERC_NPCCOMMAND
+PERC_ASSESSMAGIC
+PERC_ASSESSSTOPMAGIC
+PERC_ASSESSCASTER@wird beim 1. investierten Manapunkt gesendet
+PERC_ASSESSSURPRISE@wird beim Zurückverwandeln gesendet
+PERC_ASSESSENTERROOM
+PERC_ASSESSUSEMOB
+PERC_DIST_ACTIVE_MAX@Maximal-Reichweite der AKTIVEN Wahrnehmungen - angegeben in Npc_Default.d
+PERC_DIST_PASSIVE_MAX
+PERC_DIST_INTERMEDIAT@Mittlere Passive Wahrnehmung
+PERC_DIST_DIALOG@Dialogreichweite
+PERC_DIST_DRAGON_ACTIVE_MAX@Damit das Vlippern endlich ein Ende hat
+PERC_DIST_HEIGHT@ab welchem Höhenunterschied wird Wn ignoriert
+PERC_DIST_INDOOR_HEIGHT@Für Indoor: ab welchem Höhenunterschied wird Wn ignoriert (zum Ignorieren von anderen Stockwerken wenn ganzes Haus (Höhlensystem) EIN Portalraum ist)
+PERC_DIST_SUMMONED_ACTIVE_MAX@Maximale Reichweite der aktiven Wahrnehmung aller beschworenen Monster
+PERC_DIST_MONSTER_ACTIVE_MAX@Maximale Reichweite der aktiven Wahrnehmung ALLER anderen Monster
+POTION_Health_01
+POTION_Health_02
+POTION_Health_03
+POTION_Health_04
+POTION_Mana_01
+POTION_Mana_02
+POTION_Mana_03
+POTION_Mana_04
+POTION_MegaDrink
+POTION_Speed
+POTION_Perm_STR
+POTION_Perm_DEX
+POTION_Perm_Mana
+POTION_Perm_Health
+PRIO_EAT
+PRIO_ATTACK
+PROT_BARRIER
+PROT_BLUNT
+PROT_EDGE
+PROT_FIRE
+PROT_FLY
+PROT_MAGIC
+PROT_POINT
+PROT_FALL
+PROT_INDEX_MAX
+TRUE
+RANGED_CHANCE_MINDIST@Unterhalb dieser Distanz steigt die Trefferchance linear bis 100% an. (Default sind 10m)@[float]
+RANGED_CHANCE_MAXDIST@Ab RANGED_CHANCE_MINDIST bis RANGED_CHANCE_MAXDIST sinkt die Trefferchance bis auf 0% ab (default sind 100m)@[float]
+REAL_STRENGTH
+REAL_DEXTERITY
+REAL_MANA_MAX
+REAL_TALENT_1H
+REAL_TALENT_2H
+REAL_TALENT_BOW
+REAL_TALENT_CROSSBOW
+SENSE_SEE
+SENSE_HEAR
+SENSE_SMELL
+SPELL_GOOD
+SPELL_NEUTRAL
+SPELL_BAD
+SPL_DONTINVEST@Es können keine weiteren Manapunkte investiert werden. Erst durch CTRL loslassen geht der Spell ab
+SPL_RECEIVEINVEST@Wirkung durchgeführt, es können weitere Invest kommen, z.B. bei Heal nach jedem Pöppel
+SPL_SENDCAST@Starte den Zauber-Effekt (wie CTRL loslassen), automatischer Abbruch
+SPL_SENDSTOP@Beende Zauber ohne Effekt
+SPL_NEXTLEVEL@setze den Spruch auf den nächsten Level
+SPL_FORCEINVEST@zieht auf jeden Fall einen Manapunkt ab, egal ob timePerMana abgelaufen ist, oder nicht (sinnvoll für Investierzauber, die zumindest einen Manapunkt abziehen sollen, obwohl timePerMana noch nicht abgelaufen ist.
+//Scrolls
+SPL_COST_SCROLL
+SPL_COST_SUMMON
+SPL_COST_ARMYOFDARKNESS
+//ToDo Implement charge spells
+//1 - circle
+SPL_COST_FIREBOLT
+SPL_COST_ICEBOLT
+SPL_COST_LIGHT
+//2 - circle
+SPL_COST_SLEEP
+SPL_COST_WINDFIST
+SPL_COST_HEAL
+//3 - circle
+SPL_COST_FIREBALL
+SPL_COST_ICECUBE
+SPL_COST_THUNDERBALL
+SPL_COST_PYROKINESIS
+SPL_COST_TELEKINESSIS
+SPL_COST_CHARM
+//4 - circle
+SPL_COST_THUNDER
+SPL_COST_CONTROL
+SPL_COST_FIRESTORM
+SPL_COST_DESTROYUNDEAD
+SPL_COST_THUNDERFIST
+//5 - circle
+SPL_COST_FIRERAIN
+SPL_COST_ICEWAVE
+//6 - circle
+SPL_COST_BREATHOFDEAD
+SPL_COST_URIZIELWAVE
+// Magie-Sprüche
+SPL_LIGHT
+SPL_FIREBALL
+SPL_TRANSFORM
+SPL_FEAR
+SPL_HEAL
+SPL_LIGHTNING
+SPL_SUMMONDEMON
+SPL_SUMMONSKELETON
+// Psi-Sekte
+SPL_FORGET
+SPL_WINDFIST
+SPL_TELEKINESIS
+SPL_CHARM
+SPL_SLEEP
+SPL_PYROKINESIS
+SPL_MASSDEATH
+SPL_CONTROL
+SPL_DESTROYUNDEAD
+SPL_FIREBOLT
+SPL_FIRESTORM
+SPL_FIRERAIN
+SPL_SPEED
+SPL_TELEPORT1
+SPL_TELEPORT2
+SPL_TELEPORT3
+SPL_TELEPORT4
+SPL_TELEPORT5
+SPL_STORMFIST
+SPL_TELEKINESIS2
+SPL_BREATHOFDEATH
+SPL_SHRINK
+SPL_UNDRESS
+SPL_DANCE
+SPL_BERZERK
+SPL_NEW1
+SPL_NEW2
+SPL_NEW3
+SPL_NEW4
+SPL_NEW5
+SPL_TRF_RAZOR
+SPL_TRF_SCAVENGER2
+SPL_CHAINLIGHTNING
+SPL_THUNDERBOLT
+SPL_THUNDERBALL
+SPL_ICECUBE
+SPL_ICEWAVE
+SPL_SUMMONGOLEM
+SPL_ARMYOFDARKNESS
+SPL_TRF_BLOODFLY
+SPL_TRF_BLOODHOUND
+SPL_TRF_CRAWLER
+SPL_TRF_LURKER
+SPL_TRF_MEATBUG
+SPL_TRF_MOLERAT
+SPL_TRF_ORCDOG
+SPL_TRF_WOLF
+SPL_TRF_SCAVENGER
+SPL_TRF_SHADOWBEAST
+SPL_TRF_SNAPPER
+SPL_TRF_WARAN
+//Paladin-Runen
+SPL_PalLight
+SPL_PalLightHeal
+SPL_PalHolyBolt
+SPL_PalMediumHeal
+SPL_PalRepelEvil
+SPL_PalFullHeal
+SPL_PalDestroyEvil
+//Teleport-Runen
+SPL_PalTeleportSecret
+SPL_TeleportSeaport
+SPL_TeleportMonastery
+SPL_TeleportFarm
+SPL_TeleportXardas
+SPL_TeleportPassNW
+SPL_TeleportPassOW
+SPL_TeleportOC
+SPL_TeleportOWDemonTower
+SPL_Teleport_2
+SPL_Teleport_3
+//Runen und Scrolls
+//Kreis 1
+SPL_LIGHT
+SPL_Firebolt
+SPL_Zap
+SPL_LightHeal
+SPL_SummonGoblinSkeleton
+//Kreis 2
+SPL_InstantFireball
+SPL_Icebolt
+SPL_SummonWolf
+SPL_WINDFIST
+SPL_Sleep
+//Kreis 3
+SPL_MediumHeal
+SPL_LightningFlash
+SPL_ChargeFireball
+SPL_SummonSkeleton
+SPL_Fear
+SPL_IceCube
+//Kreis 4
+SPL_ChargeZap
+SPL_SummonGolem
+SPL_DestroyUndead
+SPL_Pyrokinesis
+//Kreis 5
+SPL_Firestorm
+SPL_IceWave
+SPL_SummonDemon
+SPL_FullHeal
+SPL_MasterOfDisaster
+//Kreis 6
+SPL_Firerain
+SPL_BreathOfDeath
+SPL_MassDeath
+SPL_ArmyOfDarkness
+SPL_Shrink
+//Scrolls
+SPL_TrfSheep
+SPL_TrfScavenger
+SPL_TrfGiantRat
+SPL_TrfGiantBug
+SPL_TrfWolf
+SPL_TrfWaran
+SPL_TrfSnapper
+SPL_TrfWarg
+SPL_TrfFireWaran
+SPL_TrfLurker
+SPL_TrfShadowbeast
+SPL_TrfDragonSnapper
+SPL_Charm
+SPL_B@Leer
+SPL_C@Leer
+SPL_D@Leer
+SPL_E@Leer
+SPL_F@Leer
+SPL_G@Leer
+SPL_H@Leer
+TARGET_COLLECT_NONE@target will be set by effect (range, azi, elev)
+TARGET_COLLECT_CASTER@target is the caster
+TARGET_COLLECT_FOCUS@target is the focus vob
+TARGET_COLLECT_ALL@all targets in range will be assembled
+TARGET_COLLECT_FOCUS_FALLBACK_NONE@target is the focus vob, if the focus vob is not valid, the trajectory will be set by the effect
+TARGET_COLLECT_FOCUS_FALLBACK_CASTER@target is the focus vob, if the focus vob is not valid, the target is the caster
+TARGET_COLLECT_ALL_FALLBACK_NONE@all targets in range will be assembled, if there are no valid targets, the trajectory will be set by the effect
+TARGET_COLLECT_ALL_FALLBACK_CASTER@all targets in range will be assembled, if there are no valid targets, the target is the caster
+TARGET_TYPE_ALL
+TARGET_TYPE_ITEMS
+TARGET_TYPE_NPCS
+TARGET_TYPE_ORCS
+TARGET_TYPE_HUMANS
+TARGET_TYPE_UNDEAD
+TEXT_FONT_20
+TEXT_FONT_10
+TEXT_FONT_DEFAULT
+TEXT_FONT_Inventory
+TRADE_VALUE_MULTIPLIER
+TROPHY_Teeth
+TROPHY_Claws
+TROPHY_Fur
+TROPHY_Heart
+TROPHY_ShadowHorn
+TROPHY_FireTongue
+TROPHY_BFWing
+TROPHY_BFSting
+TROPHY_Mandibles
+TROPHY_CrawlerPlate
+TROPHY_DrgSnapperHorn
+TROPHY_DragonScale
+TROPHY_DragonBlood
+TROPHY_ReptileSkin
+Q_KASERNE
+Q_GALGEN
+Q_MARKT
+Q_TEMPEL
+Q_UNTERSTADT
+Q_HAFEN
+Q_OBERSTADT
+VIEW_TIME_PER_CHAR@wie lange bleibt ein Text (OU) stehen, wenn kein wav da ist (msec/character)
+WEAPON_Common
+WEAPON_1H_Special_01
+WEAPON_2H_Special_01
+WEAPON_1H_Special_02
+WEAPON_2H_Special_02
+WEAPON_1H_Special_03
+WEAPON_2H_Special_03
+WEAPON_1H_Special_04
+WEAPON_2H_Special_04
+WEAR_TORSO
+WEAR_HEAD
+WISPSKILL_FF
+WISPSKILL_FOOD
+WISPSKILL_MAGIC
+WISPSKILL_NF
+WISPSKILL_NONE
+WISPSKILL_POTIONS
+WISPSKILL_RUNE
+XP_PER_VICTORY@Erfahrungspunkte pro Level des Gegners
+ZivilAnquatschDist@Distanz, ab der dich ein NSC zivil anspricht (Maximum ist PERC_DIST_ACTIVE_MAX --> B_AssessPlayer)
+ADDONWORLD_ZEN@Konstante für die Addonwelt@Wird zur Scriptinternen-Verwaltung eingesetzt(Wo befindet sich der Held gerade?)(Addon)
+NEWWORLD_ZEN
+OLDWORLD_ZEN
+DRAGONISLAND_ZEN
