@@ -163,7 +163,7 @@
             ]
         },
         "func-def": {
-            "begin": "(?i)\\b(func)\\s+(\\w+)(?=\\s+\\w+\\s*\\()",
+            "begin": "(?i)\\b(func)\\s+(\\w+)(?=\\s+[\\w@^]+\\s*\\()",
             "end": "};",
             "beginCaptures": {
                 "0": { "name": "entity.function" },
@@ -179,7 +179,7 @@
             ]
         },
         "functions": {
-            "match": "\\b(?:\\w+)\\b\\s*(?=\\()",
+            "match": "\\b(?:[\\w@^]+)\\s*(?=\\()",
             "name": "entity.name.function"
         }
     }
