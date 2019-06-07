@@ -303,7 +303,7 @@ export function activate(context: vscode.ExtensionContext) {
 		provideSignatureHelp(document, position, token, context): vscode.ProviderResult<vscode.SignatureHelp> {
 			var sig = new vscode.SignatureHelp();
 			let linePrefix = document.lineAt(position).text.substr(0, position.character);
-
+			linePrefix = linePrefix.replace(/(?<=\(|,\s*)[\w.]+\(.*?\)/g, "C"); // Replaces Methodcalls with "C"
 			if (/^\s*func\s+/i.test(linePrefix)) return undefined;
 
 			const match = /(\w+)\s*\(.*$/.exec(linePrefix);
