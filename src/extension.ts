@@ -35,6 +35,7 @@ class Entry {
 class Method extends Entry {
 	params: string[] = [];
 	source: string = "internal";
+	sourceLine: number = -1;
 	nameUpper = "";
 }
 
@@ -57,6 +58,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let methodInfos: Method[] = [];
 	let classInfos: ClassJson[] = [];
+	let globalVariables: Map<string, ClassJson> = new Map<string, ClassJson>();
 
 	const workSpace = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0].uri.fsPath.toUpperCase() : undefined;
 	let watcher = vscode.workspace.createFileSystemWatcher("**/*.*", true);
@@ -73,12 +75,7 @@ export function activate(context: vscode.ExtensionContext) {
 		init();
 	});
 	function makeRelative(f: string) {
-		if (workSpace && f.includes(workSpace)) {
-			return path.relative(workSpace, f);
-		} else if (f.includes(completionsPath)) {
-			return path.relative(completionsPath, f);
-		}
-		return f;
+		return vscode.workspace.asRelativePath(f);
 	}
 	function parseMethodsSingle(file: string, methodStore: Method[], methodCompletionsStore: vscode.CompletionItem[]) {
 		fs.readFile(file, (err, buf) => {
@@ -97,6 +94,11 @@ export function activate(context: vscode.ExtensionContext) {
 					m.name = match[2];
 					m.detail = match[1].replace(/\s+/g, " ").replace(" )", ")").replace("( ", "(");
 					m.source = makeRelative(file);
+					let line = 0;
+					for (let i = 0; i < match.index; i++) {
+						if (content[i] === "\n") line++;
+					}
+					m.sourceLine = line;
 					m.nameUpper = m.name.toUpperCase();
 					// Kommentar
 					m.desc = match[3] || "";
@@ -400,9 +402,30 @@ export function activate(context: vscode.ExtensionContext) {
 		'.' // triggered whenever a '.' is being typed
 	);
 
+	const goToDefProvider = vscode.languages.registerDefinitionProvider('daedalus', {
+		provideDefinition(document, position, token) {
+			let range = document.getWordRangeAtPosition(position);
+			if (range) {
+				let linePrefix = document.getText(range);
+				let found = methodInfos.find(x => x.name === linePrefix);
+				if (found && found.source !== "internal") {
+					if (vscode.workspace.workspaceFolders) {
+						let fullPath = path.resolve(vscode.workspace.workspaceFolders[0].uri.fsPath, found.source);
+						let uri = vscode.Uri.file(fullPath);
+						return new vscode.Location(
+							uri,
+							new vscode.Position(found.sourceLine, 0)
+						);
+					}
+				}
+			}
+			return undefined;
+		}
+	});
+
 	context.subscriptions.push(
 		globalProvider,
-		dotProvider,
+		goToDefProvider,
 		signatureProvider,
 		hoverProvider,
 		watcher

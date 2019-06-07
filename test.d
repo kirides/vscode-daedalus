@@ -168,8 +168,10 @@ func void _TRIA_UpdateVisual(var c_npc slf, var int armor) {
 // Angelegte Waffe tauschen
 //========================================
 func void Npc_TradeItem(var c_npc slf, var int itm0, var int itm1) {
+    Npc_Tra
     if(itm0) {
         Npc_GetInvItem()
+        
         EquipWeapon(slf, itm0);
         Npc_RemoveInvItem(slf, itm0);
     };
