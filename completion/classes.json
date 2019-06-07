@@ -1,0 +1,5 @@
+[{
+    "name": "C_NPC",
+    "fields": [{ "name": "attribute", "detail": "attribute[]", "desc": "" }],
+    "methods": []
+}]

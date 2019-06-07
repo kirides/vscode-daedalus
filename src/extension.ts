@@ -38,6 +38,12 @@ class Method extends Entry {
 	nameUpper = "";
 }
 
+interface ClassJson {
+	name: string;
+	methods: Method[];
+	fields: Entry[];
+}
+
 export function activate(context: vscode.ExtensionContext) {
 	var keywordCompletions: vscode.CompletionItem[] = [];
 	var methodCompletions: vscode.CompletionItem[] = [];
@@ -49,16 +55,21 @@ export function activate(context: vscode.ExtensionContext) {
 	var variablesPath = path.join(context.extensionPath, "completion", "variables.csv")
 	var completionsPath = path.join(context.extensionPath, "completion").toUpperCase();
 
-	let methods: Method[] = [];
-	
+	let methodInfos: Method[] = [];
+	let classInfos: ClassJson[] = [];
+
 	const workSpace = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0].uri.fsPath.toUpperCase() : undefined;
 	let watcher = vscode.workspace.createFileSystemWatcher("**/*.*", true);
+
 	watcher.onDidChange(_ => {
-		if (_.fsPath.includes("node_modules")) return;
+		const ext = path.extname(_.fsPath).toUpperCase();
+		if (ext !== "D" && ext !== "SRC") return;
+		console.log("file changed: " + vscode.workspace.asRelativePath(_.fsPath))
 		init();
 	});
 	watcher.onDidDelete(_ => {
-		if (_.fsPath.includes("node_modules")) return;
+		const ext = path.extname(_.fsPath).toUpperCase();
+		if (ext !== "D" && ext !== "SRC") return;
 		init();
 	});
 	function makeRelative(f: string) {
@@ -89,6 +100,7 @@ export function activate(context: vscode.ExtensionContext) {
 					m.nameUpper = m.name.toUpperCase();
 					// Kommentar
 					m.desc = match[3] || "";
+					prepareMethod(m);
 					meths.push(m);
 				}
 				match = rxFuncs.exec(content);
@@ -114,7 +126,6 @@ export function activate(context: vscode.ExtensionContext) {
 			files.forEach(f => parseMethodsSingle(f, methodStore, methodCompletionsStore))
 		});
 	}
-
 	function readMethods(file: string, methodStore: Method[], methodCompletionsStore: vscode.CompletionItem[]) {
 		fs.readFile(file, (err, buf) => {
 			if (err) {
@@ -130,22 +141,7 @@ export function activate(context: vscode.ExtensionContext) {
 						m.source = baseName[0];
 					}
 				}
-				if (m.detail && m.detail.length > 2) {
-					let start = m.detail.indexOf("(");
-					let end = m.detail.indexOf(")");
-					let params = m.detail.substring(start + 1, end).trim();
-					m.params = [];
-					if (params.includes(",")) {
-						params.split(',')
-							.map(x => x.trim())
-							.filter(x => x !== "")
-							.forEach(c => {
-								m.params.push(c.trim());
-							})
-					} else if (params.length > 0) {
-						m.params.push(params);
-					}
-				}
+				prepareMethod(m);
 
 				let completionItem = new vscode.CompletionItem(m.name.trim(), vscode.CompletionItemKind.Method);
 				completionItem.documentation = "Source: " + m.source + "\n\n" + m.desc;
@@ -157,6 +153,32 @@ export function activate(context: vscode.ExtensionContext) {
 			meths.forEach(m => m.nameUpper = m.name.toUpperCase());
 		})
 	}
+
+	function readClasses(file: string, classStore: ClassJson[]) {
+		fs.readFile(file, (err, buf) => {
+			if (err) {
+				console.error(err);
+				return;
+			}
+			const classes: ClassJson[] = JSON.parse(buf.toString());
+			classes.forEach(c => {
+				if (c.methods) {
+					c.methods.forEach(m => {
+						if (!m.source || m.source.trim().length === 0) {
+							m.source = "internal";
+							let baseName = path.basename(file).split(".");
+							if (baseName.length > 2) {
+								m.source = baseName[0];
+							}
+						}
+						prepareMethod(m);
+					})
+				}
+				classStore.push(c);
+			})
+		})
+	}
+
 	function parseSource(f: string) {
 		let baseDir = path.dirname(f);
 		console.log("Parsing " + baseDir + "/" + path.basename(f));
@@ -177,11 +199,11 @@ export function activate(context: vscode.ExtensionContext) {
 				if (absPath.endsWith(".D")) {
 					if (absPath.includes("*")) {
 						// Parse multiple
-						parseMethodsGlobb(absPath, methods, methodCompletions);
+						parseMethodsGlobb(absPath, methodInfos, methodCompletions);
 					} else {
 						// Parse single
 						if (fs.existsSync(absPath)) {
-							parseMethodsSingle(absPath, methods, methodCompletions);
+							parseMethodsSingle(absPath, methodInfos, methodCompletions);
 						}
 					}
 				} else if (absPath.endsWith(".SRC")) {
@@ -203,7 +225,7 @@ export function activate(context: vscode.ExtensionContext) {
 			console.info("Parsed " + path.basename(f));
 		});
 	}
-	function parseGothicSrc() {
+	function parseGothicSrc(): boolean {
 		if (workSpace) {
 			fs.readdir(workSpace, (err, files) => {
 				if (err) {
@@ -213,14 +235,15 @@ export function activate(context: vscode.ExtensionContext) {
 				for (const f of files) {
 					if (f.toUpperCase() === "GOTHIC.SRC") {
 						parseSource(path.join(workSpace, f));
-						return;
+						return true;
 					}
 				}
 			})
 		}
+		return false;
 	}
 	function init() {
-		methods = [];
+		methodInfos = [];
 		keywordCompletions = [];
 		constantCompletions = [];
 		variableCompletions = [];
@@ -247,7 +270,10 @@ export function activate(context: vscode.ExtensionContext) {
 			files.forEach(f => {
 				if (f.endsWith("methods.json")) {
 					const fullpath = path.join(completionsPath, f);
-					readMethods(fullpath, methods, methodCompletions);
+					readMethods(fullpath, methodInfos, methodCompletions);
+				} else if (f.endsWith("classes.json")) {
+					const fullpath = path.join(completionsPath, f);
+					readClasses(fullpath, classInfos);
 				}
 			})
 		})
@@ -282,7 +308,16 @@ export function activate(context: vscode.ExtensionContext) {
 			return completionItem;
 		});
 
-		parseGothicSrc();
+		if (!parseGothicSrc()) {
+			console.log("no gothic.src found. Fall back to parse all .d")
+			vscode.workspace.findFiles("**/*.{D,d}").then(files => {
+				files.forEach(f => {
+					parseMethodsSingle(f.fsPath, methodInfos, methodCompletions);
+				})
+			}, err => {
+				console.error(err);
+			});
+		}
 	}
 	init();
 
@@ -312,7 +347,7 @@ export function activate(context: vscode.ExtensionContext) {
 				const lineFrom = match[0].lastIndexOf('(')
 				const sigCtx = match[0].substring(lineFrom + 1);
 				const compareText = match![1].toUpperCase();
-				const found = methods.find(x => x.nameUpper === compareText);
+				const found = methodInfos.find(x => x.nameUpper === compareText);
 				if (found) {
 					let info = new vscode.SignatureInformation(found.detail, found.desc);
 					sig.activeSignature = 0;
@@ -337,7 +372,7 @@ export function activate(context: vscode.ExtensionContext) {
 			let range = document.getWordRangeAtPosition(position);
 			if (range) {
 				let linePrefix = document.getText(range);
-				let found = methods.find(x => x.name === linePrefix);
+				let found = methodInfos.find(x => x.name === linePrefix);
 				if (found) {
 					return new vscode.Hover(new vscode.MarkdownString("```\n" + found.detail + "\n```"));
 				}
@@ -365,5 +400,32 @@ export function activate(context: vscode.ExtensionContext) {
 		'.' // triggered whenever a '.' is being typed
 	);
 
-	context.subscriptions.push(globalProvider, dotProvider, signatureProvider, hoverProvider);
+	context.subscriptions.push(
+		globalProvider,
+		dotProvider,
+		signatureProvider,
+		hoverProvider,
+		watcher
+	);
+}
+
+function prepareMethod(m: Method) {
+	if (m.detail && m.detail.length > 2) {
+		let start = m.detail.indexOf("(");
+		let end = m.detail.indexOf(")");
+		let params = m.detail.substring(start + 1, end).trim();
+		m.nameUpper = m.name.toUpperCase();
+		m.params = [];
+		if (params.includes(",")) {
+			params.split(',')
+				.map(x => x.trim())
+				.filter(x => x !== "")
+				.forEach(c => {
+					m.params.push(c.trim());
+				});
+		}
+		else if (params.length > 0) {
+			m.params.push(params);
+		}
+	}
 }
