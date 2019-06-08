@@ -2,45 +2,30 @@
     "name": "daedalus",
     "description": "Daedalus Language Support",
     "version": "0.0.1",
-    "engines": {
-        "vscode": ">=1.32.0"
-    },
+    "engines": { "vscode": ">=1.32.0" },
     "publisher": "Kirides",
-    "activationEvents": [
-        "*"
-    ],
+    "activationEvents": ["*"],
     "contributes": {
         "configurationDefaults": {
             "[daedalus]": {
                 "files.encoding": "windows1252"
             }
         },
-        "languages": [
-            {
-                "id": "daedalus",
-                "aliases": [
-                    "Daedalus",
-                    "daedalus"
-                ],
-                "extensions": [
-                    "d"
-                ],
-                "configuration": "./language-configuration.json"
-            }
-        ],
-        "grammars": [
-            {
-                "language": "daedalus",
-                "scopeName": "source.daedalus",
-                "path": "./syntaxes/daedalus.tmLanguage.json"
-            }
-        ],
-        "snippets": [
-            {
-                "language": "daedalus",
-                "path": "./snippets/daedalus.json"
-            }
-        ]
+        "languages": [{
+            "id": "daedalus",
+            "aliases": ["Daedalus", "daedalus"],
+            "extensions": ["d", "D"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "daedalus",
+            "scopeName": "source.daedalus",
+            "path": "./syntaxes/daedalus.tmLanguage.json"
+        }],
+        "snippets": [{
+            "language": "daedalus",
+            "path": "./snippets/daedalus.json"
+        }]
     },
     "main": "./out/extension.js",
     "scripts": {
