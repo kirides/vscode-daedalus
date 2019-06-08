@@ -340,7 +340,7 @@ export function activate(context: vscode.ExtensionContext) {
 		provideSignatureHelp(document, position, token, context): vscode.ProviderResult<vscode.SignatureHelp> {
 			var sig = new vscode.SignatureHelp();
 			let linePrefix = document.lineAt(position).text.substr(0, position.character);
-			linePrefix = linePrefix.replace(/(?<=\(|,\s*)[\w.]+\(.*?\)/g, "C"); // Replaces Methodcalls with "C"
+			linePrefix = linePrefix.replace(/(?<=\(|,\s*)[\w.]*\(.*?\)/g, "C"); // Replaces Methodcalls with "C"
 			if (/^\s*func\s+/i.test(linePrefix)) return undefined;
 
 			const match = /(\w+)\s*\(.*$/.exec(linePrefix);
@@ -385,22 +385,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const dotProvider = vscode.languages.registerCompletionItemProvider('daedalus', {
 		provideCompletionItems(document, position) {
-			// get all text until the `position` and check if it reads `console.`
-			// and iff so then complete if `log`, `warn`, and `error`
-			let linePrefix = document.lineAt(position).text.substr(0, position.character);
-			if (!linePrefix.endsWith('console.')) {
-				return undefined;
-			}
-
-			return [
-				new vscode.CompletionItem('log', vscode.CompletionItemKind.Method),
-				new vscode.CompletionItem('warn', vscode.CompletionItemKind.Method),
-				new vscode.CompletionItem('error', vscode.CompletionItemKind.Method),
-			];
+			// TODO: Implement
+			return undefined;
 		}
-	},
-		'.' // triggered whenever a '.' is being typed
-	);
+	}, '.' /* triggered whenever a '.' is being typed */);
 
 	const goToDefProvider = vscode.languages.registerDefinitionProvider('daedalus', {
 		provideDefinition(document, position, token) {
