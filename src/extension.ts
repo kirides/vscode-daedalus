@@ -326,14 +326,7 @@ export function activate(context: vscode.ExtensionContext) {
 	const globalProvider = vscode.languages.registerCompletionItemProvider('daedalus', {
 		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) {
 			// return all completion items as array
-			return keywordCompletions.concat(methodCompletions).concat(constantCompletions).concat(variableCompletions).sort((a, b) => {
-				if (a.label > b.label) {
-					return 1;
-				} else if (a.label < b.label) {
-					return -1;
-				}
-				return 0;
-			});
+			return keywordCompletions.concat(methodCompletions).concat(constantCompletions).concat(variableCompletions);
 		}
 	});
 	const signatureProvider = vscode.languages.registerSignatureHelpProvider('daedalus', {
