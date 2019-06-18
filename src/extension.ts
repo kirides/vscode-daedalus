@@ -8,6 +8,8 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as glob from 'glob';
+import { LanguageClient, LanguageClientOptions, SettingMonitor, ServerOptions, TransportKind, InitializeParams } from 'vscode-languageclient';
+import { Trace } from 'vscode-jsonrpc';
 
 interface CompletionAccumulator {
 	(line: string): vscode.CompletionItem;
@@ -404,12 +406,39 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
+	let serverExe = 'dotnet';
+
+	let serverOptions: ServerOptions = {
+		run: { command: serverExe, args: [path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer.dll')] },
+		debug: { command: serverExe, args: [path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer.dll')] }
+	}
+
+	// Options to control the language client
+	let clientOptions: LanguageClientOptions = {
+		// Register the server for plain text documents
+		documentSelector: [
+			{ pattern: '**/*.d', },
+			{ pattern: '**/*.D', }
+		],
+		synchronize: {
+			// Synchronize the setting section 'languageServerExample' to the server
+			configurationSection: 'languageServer',
+			fileEvents: vscode.workspace.createFileSystemWatcher('**/*.d')
+		},
+	}
+
+	// Create the language client and start the client.
+	const client = new LanguageClient('languageServer', 'Language Server', serverOptions, clientOptions);
+	client.trace = Trace.Verbose;
+	let languageServerClient = client.start();
+
 	context.subscriptions.push(
 		globalProvider,
 		goToDefProvider,
 		signatureProvider,
 		hoverProvider,
-		watcher
+		watcher,
+		languageServerClient,
 	);
 }
 
