@@ -335,31 +335,47 @@ export function activate(context: vscode.ExtensionContext) {
 		provideSignatureHelp(document, position, token, context): vscode.ProviderResult<vscode.SignatureHelp> {
 			var sig = new vscode.SignatureHelp();
 			let linePrefix = document.lineAt(position).text.substr(0, position.character);
-			linePrefix = linePrefix.replace(/(?<=\(|,\s*)[\w.]*\(.*?\)/g, "C"); // Replaces Methodcalls with "C"
 			if (/^\s*func\s+/i.test(linePrefix)) return undefined;
+			// linePrefix = linePrefix.replace(/(?<=\(|,\s*)[\w.]*\(.*?\)/g, "C"); // Replaces Methodcalls with "C"
+			linePrefix = linePrefix.replace(/(".*?"|'.*?')/g, ""); // Replaces Methodcalls
+			let oldLen = -1;
+			while(linePrefix.length != oldLen) {
+				oldLen = linePrefix.length;
+				linePrefix = linePrefix.replace(/\([\w@^_,:"'=\s]*\)/g, ""); // Replaces Methodcalls
+			}
 
-			const match = /(\w+)\s*\(.*$/.exec(linePrefix);
-
-			if (match !== null) {
-				const lineFrom = match[0].lastIndexOf('(')
-				const sigCtx = match[0].substring(lineFrom + 1);
-				const compareText = match![1].toUpperCase();
-				const found = methodInfos.find(x => x.nameUpper === compareText);
-				if (found) {
-					let info = new vscode.SignatureInformation(found.detail, found.desc);
-					sig.activeSignature = 0;
-					sig.activeParameter = 0;
-					if (found.params) {
-						info.parameters = found.params.map(x => new vscode.ParameterInformation(x));
-						sig.signatures.push(info);
-
-						if (sigCtx.indexOf(",") >= 0) {
-							sig.activeParameter = sigCtx.split(",").length - 1;
-						}
-					}
-					return sig;
+			let word = undefined;
+			let idxOfParen = linePrefix.lastIndexOf('(');
+			for (let i = idxOfParen - 1; i > 0; i--) {
+				const c = linePrefix[i];
+				if (/[^\w@^]/.test(c)) {
+					word = linePrefix.substring(i + 1, idxOfParen);
+					break;
 				}
 			}
+			if (!word) {
+				word = linePrefix.substring(0, idxOfParen);
+			}
+			word = word.trim();
+
+			const sigCtx = linePrefix.substring(idxOfParen + 1);
+			const compareText = word.toUpperCase();
+			const found = methodInfos.find(x => x.nameUpper === compareText);
+			if (found) {
+				let info = new vscode.SignatureInformation(found.detail, found.desc);
+				sig.activeSignature = 0;
+				sig.activeParameter = 0;
+				if (found.params) {
+					info.parameters = found.params.map(x => new vscode.ParameterInformation(x));
+					sig.signatures.push(info);
+
+					if (sigCtx.indexOf(",") >= 0) {
+						sig.activeParameter = sigCtx.split(",").length - 1;
+					}
+				}
+				return sig;
+			}
+
 			return undefined;
 		}
 	}, '(', ',');
