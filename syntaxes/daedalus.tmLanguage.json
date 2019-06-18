@@ -80,7 +80,7 @@
         },
         "if": {
             "begin": "\\b(if)\\b",
-            "end": "};",
+            "end": "};?",
             "beginCaptures": {
                 "0": { "name": "entity.statement.if" },
                 "1": { "name": "keyword.control" }
