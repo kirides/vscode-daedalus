@@ -340,7 +340,7 @@
     { "name": "B_RaiseAttribute", "detail": "", "desc": "" },
     { "name": "B_RaiseFightTalent", "detail": "", "desc": "" },
     { "name": "CastSpell", "detail": "", "desc": "" },
-    { "name": "ConcatStrings", "detail": "", "desc": "" },
+    { "name": "ConcatStrings", "detail": "void ConcatStrings(var string a, var string b)", "desc": "Kombiniert string a und b" },
     { "name": "CreateInMob", "detail": "", "desc": "" },
     { "name": "CreateInvItem", "detail": "void CreateInvItem(var c_npc n0, var int n1)", "desc": "gibt der angegebenen Instanz (self oder other) ein Item ins Inventory" },
     { "name": "CreateInvItems", "detail": "void CreateInvItems(var c_npc n0, var int n1, var int n2)", "desc": "wie \"CreateInvItem\", nur das Multi-Items (z.B.: 100 Pfeile) ins Inventory kreiert werden" },
