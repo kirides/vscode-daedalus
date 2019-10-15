@@ -1,71 +1,87 @@
 {
-    "name": "daedalus",
-    "description": "Daedalus Language Support",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Kirides/vscode-daedalus.git"
+  "name": "daedalus",
+  "description": "Daedalus Language Support",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kirides/vscode-daedalus.git"
+  },
+  "author": {
+    "name": "Kirides",
+    "url": "https://github.com/Kirides/"
+  },
+  "displayName": "Daedalus (Gothic/II)",
+  "homepage": "https://github.com/Kirides/vscode-daedalus",
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "ia32"
+  ],
+  "license": "MIT",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": ">=1.35.0"
+  },
+  "publisher": "Kirides",
+  "activationEvents": [
+    "onLanguage:daedalus"
+  ],
+  "contributes": {
+    "configurationDefaults": {
+      "[daedalus]": {
+        "files.encoding": "windows1252"
+      }
     },
-    "author": {
-        "name": "Kirides",
-        "url": "https://github.com/Kirides/"
-    },
-    "displayName": "Daedalus (Gothic/II)",
-    "homepage": "https://github.com/Kirides/vscode-daedalus",
-    "os": ["win32"],
-    "cpu": ["x64", "ia32"],
-    "license": "MIT",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": ">=1.35.0"
-    },
-    "publisher": "Kirides",
-    "activationEvents": [
-        "onLanguage:daedalus"
+    "languages": [
+      {
+        "id": "daedalus",
+        "aliases": [
+          "Daedalus",
+          "daedalus"
+        ],
+        "extensions": [
+          "d",
+          "D"
+        ],
+        "configuration": "./language-configuration.json"
+      }
     ],
-    "contributes": {
-        "configurationDefaults": {
-            "[daedalus]": {
-                "files.encoding": "windows1252"
-            }
-        },
-        "languages": [{
-            "id": "daedalus",
-            "aliases": [
-                "Daedalus",
-                "daedalus"
-            ],
-            "extensions": [
-                "d",
-                "D"
-            ],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "daedalus",
-            "scopeName": "source.daedalus",
-            "path": "./syntaxes/daedalus.tmLanguage.json"
-        }],
-        "snippets": [{
-            "language": "daedalus",
-            "path": "./snippets/daedalus.json"
-        }]
-    },
-    "main": "./out/extension.js",
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc  -p ./",
-        "lint": "tslint -p ./",
-        "watch": "tsc -watch -p ./"
-    },
-    "devDependencies": {
-        "@types/node": "^10.14.8",
-        "@types/vscode": "^1.35.0",
-        "tslint": "^5.17.0",
-        "typescript": "^3.5.1"
-    },
-    "dependencies": {
-        "@types/glob": "^7.1.1",
-        "glob": "^7.1.4",
-        "vscode-languageclient": "^5.2.1"
-    }
+    "grammars": [
+      {
+        "language": "daedalus",
+        "scopeName": "source.daedalus",
+        "path": "./syntaxes/daedalus.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "daedalus",
+        "path": "./snippets/daedalus.json"
+      }
+    ]
+  },
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile && webpack --mode production",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "compile": "tsc  -p ./",
+    "lint": "tslint -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^10.14.8",
+    "@types/vscode": "^1.35.0",
+    "ts-loader": "^6.2.0",
+    "tslint": "^5.17.0",
+    "typescript": "^3.5.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "@types/glob": "^7.1.1",
+    "glob": "^7.1.4",
+    "vscode-languageclient": "^5.2.1"
+  }
 }

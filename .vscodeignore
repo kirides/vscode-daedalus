@@ -2,6 +2,7 @@
 *.vsix
 **/*.ts
 **/tsconfig.json
-/test.d
-/NINJA_ManaReg_INITCONTENT.d
-/lsp-log.txt
+test.d
+NINJA_ManaReg_INITCONTENT.d
+lsp-log.txt
+node_modules/
