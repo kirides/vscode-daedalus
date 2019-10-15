@@ -2,19 +2,23 @@
     "scopeName": "source.daedalus",
     "patterns": [
         { "include": "#type-declarations" },
-        { "include": "#var-def" },
         { "include": "#func-def" },
         { "include": "#expression-simple" }
     ],
     "repository": {
+        "constant-values": {
+            "patterns": [
+                { "include": "#strings" },
+                { "include": "#constant-num" },
+                { "include": "#constant-bool" },
+                { "include": "#constant-lang" }
+            ]
+        },
         "expression": {
             "patterns": [
                 { "include": "#comments" },
                 { "include": "#preprocessors" },
-                { "include": "#strings" },
-                { "include": "#constant-num" },
-                { "include": "#constant-bool" },
-                { "include": "#constant-lang" },
+                { "include": "#constant-values" },
                 { "include": "#if" },
                 { "include": "#var-def" },
                 { "include": "#keyword" },
@@ -26,10 +30,7 @@
             "patterns": [
                 { "include": "#comments" },
                 { "include": "#preprocessors" },
-                { "include": "#strings" },
-                { "include": "#constant-num" },
-                { "include": "#constant-bool" },
-                { "include": "#constant-lang" },
+                { "include": "#constant-values" },
                 { "include": "#var-def" },
                 { "include": "#keyword" },
                 { "include": "#classes" }
@@ -158,6 +159,7 @@
             "end": ",|\\)|;",
             "patterns": [
                 { "include": "#comment-block" },
+                { "include": "#constant-values" },
                 { "include": "#keyword" },
                 { "include": "#classes" }
             ]

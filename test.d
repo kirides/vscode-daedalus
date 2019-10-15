@@ -38,7 +38,6 @@ func void EquipWeapon (var C_NPC slf, var int ItemInst) {
         MEM_Info ("EquipWeapon: This weapon is already equipped. Ignoring request.");
         return;
     };
-
     CALL_PtrParam(MEM_InstToPtr(item));
     CALL__thiscall(MEM_InstToPtr(slf), oCNpc__EquipWeapon);
 };
@@ -107,6 +106,7 @@ var int TRIA_Self;                // Pointer auf self
 var string TRIA_Camera;           // Läuft eine Kamerafahrt?
 
 func void ZS_TRIA() {};
+
 func int ZS_TRIA_Loop() {
     if (InfoManager_hasFinished()) { // Im Zustand bleiben bis Dialog fertig
         return LOOP_END;
@@ -114,20 +114,6 @@ func int ZS_TRIA_Loop() {
         return LOOP_CONTINUE;
     };
 };
-
-class Item (Vob)
-{
-  // attributes
-  var int damage;
-  var int attack;
-  var string description;
-  // actions
-  var funcref use;
-};
-
-  
-
-
 
 prototype SchildProtoType (Item) {
   damage = 0;
@@ -169,14 +155,11 @@ func void _TRIA_UpdateVisual(var c_npc slf, var int armor) {
 // Angelegte Waffe tauschen
 //========================================
 func void Npc_TradeItem(var c_npc slf, var int itm0, var int itm1) {
-    Npc_Tra
-    if(itm0) {
-        Npc_GetInvItem()
-        
+    if (itm0) {
         EquipWeapon(slf, itm0);
         Npc_RemoveInvItem(slf, itm0);
     };
-    if(itm1) {
+    if (itm1) {
         CreateInvItem(slf, itm1);
         EquipWeapon(slf, itm1);
     };
@@ -199,6 +182,7 @@ func void _TRIA_Copy(var int n0, var int n1) {
     var oCNpc onp1; onp1 = MEM_PtrToInst(n1);
     var int a0; a0 = Npc_GetArmor(np0);
     var int a1; a1 = Npc_GetArmor(np1);
+
     var _TRIA_fltWrapper fn0; fn0 = MEM_PtrToInst(_@(onp0.model_scale));
     var _TRIA_fltWrapper fn1; fn1 = MEM_PtrToInst(_@(onp1.model_scale));
     MEM_SwapBytes(n0+60,                       n1+60,                      64);                          // trafo
@@ -223,7 +207,6 @@ func void _TRIA_Copy(var int n0, var int n1) {
     Npc_TradeItem(np0, rw0, rw1);
     Npc_TradeItem(np1, mw1, mw0);
     Npc_TradeItem(np1, rw1, rw0);
-    Zy
 };
 
 //========================================
@@ -271,6 +254,7 @@ func void TRIA_Invite(var c_npc slf) {
         MEM_Error("TRIA_Invite: Zu viele Npcs. Erhöhe bitte TRIA_MaxNPC.");
         return;
     };
+    
     if(Hlp_GetInstanceID(slf) == Hlp_GetInstanceID(hero)
     || Hlp_GetInstanceID(slf) == Hlp_GetInstanceID(self)) {
         MEM_Warn("TRIA_Invite: Der Held und/oder Self können nicht eingeladen werden. Sie sind bereits anwesend.");
@@ -295,7 +279,7 @@ func void TRIA_Start() {
         MEM_Warn("TRIA_Start: Es läuft bereits ein Trialog.");
         return;
     };
-    Npc_GetInvItem()
+    Npc_GetInvItem();
     var int i; i = 0;
     var int p; p = MEM_StackPos.position;
     if(i < TRIA_CPtr) {
@@ -311,6 +295,7 @@ func void TRIA_Start() {
 
     var c_npc selfCopy; selfCopy = Hlp_GetNpc(self);
     self = MEM_NullToInst();
+    
     TRIA_Invite(selfCopy);
     self = Hlp_GetNpc(selfCopy);
     TRIA_Wait();
