@@ -62,7 +62,7 @@
             "name": "comment"
         },
         "keyword": {
-            "match": "\\b(?:class|const|float|funcref|func|instance|int|other|prototype|return|string|this|var|void|while)\\b",
+            "match": "\\b(?:class|const|float|funcref|func|instance|int|other|prototype|return|string|this|var|void)\\b",
             "name": "keyword.control"
         },
         "classes": {
