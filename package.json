@@ -19,7 +19,7 @@
     "ia32"
   ],
   "license": "MIT",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "engines": {
     "vscode": ">=1.35.0"
   },
@@ -67,21 +67,20 @@
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch",
     "compile": "tsc  -p ./",
-    "lint": "tslint -p ./",
+    "lint": "eslint",
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
     "@types/node": "^10.14.8",
-    "@types/vscode": "^1.35.0",
-    "ts-loader": "^6.2.0",
-    "tslint": "^5.17.0",
-    "typescript": "^3.5.1",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "@types/vscode": "^1.43.0",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   },
   "dependencies": {
     "@types/glob": "^7.1.1",
-    "glob": "^7.1.4",
-    "vscode-languageclient": "^5.2.1"
+    "glob": "^7.1.6",
+    "vscode-languageclient": "^6.1.3"
   }
 }
