@@ -100,7 +100,7 @@
             ]
         },
         "else-if": {
-            "begin": "(?i)\\b(else\\s+if)\\s*\\(",
+            "begin": "(?i)\\b(else\\s+if)\\b",
             "end": "(?=(};|}))",
             "beginCaptures": {
                 "0": { "name": "entity.statement.else-if" },
@@ -113,7 +113,7 @@
             ]
         },
         "else": {
-            "begin": "(?i)\\b(else)\\s*{",
+            "begin": "(?i)\\b(else)\\b",
             "end": "(?=(};|}))",
             "beginCaptures": {
                 "0": { "name": "entity.statement.else" },
