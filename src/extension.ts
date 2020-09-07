@@ -9,6 +9,7 @@ import * as path from 'path';
 import { LanguageClient, LanguageClientOptions, ServerOptions } from 'vscode-languageclient';
 import { Trace } from 'vscode-jsonrpc';
 
+const LANGUAGE: string = "daedalus";
 
 export function activate(context: vscode.ExtensionContext) {
 	let serverExe = path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer.exe');
@@ -22,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
 	let clientOptions: LanguageClientOptions = {
 		// Register the server for plain text documents
 		documentSelector: [
-			{ language: 'daedalus', },
+			{ language: LANGUAGE, },
 			{ pattern: '**/*.d', },
 			{ pattern: '**/*.D', }
 		]

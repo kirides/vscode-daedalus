@@ -15,6 +15,30 @@
 const int EquipWeapon_TogglesEquip = 1;
 var int asd;
 
+/// This Function is annotated
+/// With a bunch of text
+/// So any developer can know what it does
+func int learn1hSkill(var int skill) {
+	var string 1hSkillText, var int meinInt;
+	1hSkillText = ConcatStrings ("Lerne: Einhand Stufe ", IntToString (skill));
+    
+    decreaseLearnPoints(B_GetLearnCostWeaponSkill(NPC_TALENT_1H, skill));
+            PrintScreen_Ext(1hSkillText, -1, -1, FONT_SCREEN, 2);
+            B_RaiseFightTalent(hero, NPC_TALENT_1H, B_GetRaiseAmountOfWeaponSkill(NPC_TALENT_1H, skill));
+            onehandedSkillLevel = skill;
+
+    };
+func void While_isok() {
+    While_isok_Loop();
+};
+
+func void While_isok_Loop() {
+    if (a) {
+        // Loop body here:
+        
+        While_isok_Loop();
+    };
+};
 func void EquipWeapon (var C_NPC slf, var int ItemInst) {
 
     if (!Npc_HasItems (slf, ItemInst)) {

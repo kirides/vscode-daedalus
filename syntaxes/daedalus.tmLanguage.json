@@ -20,10 +20,11 @@
                 { "include": "#preprocessors" },
                 { "include": "#constant-values" },
                 { "include": "#if" },
+                { "include": "#var-def-array" },
+                { "include": "#var-def-lang" },
                 { "include": "#var-def" },
                 { "include": "#keyword" },
-                { "include": "#functions" },
-                { "include": "#classes" }
+                { "include": "#functions" }
             ]
         },
         "expression-simple": {
@@ -31,9 +32,10 @@
                 { "include": "#comments" },
                 { "include": "#preprocessors" },
                 { "include": "#constant-values" },
+                { "include": "#var-def-array" },
+                { "include": "#var-def-lang" },
                 { "include": "#var-def" },
-                { "include": "#keyword" },
-                { "include": "#classes" }
+                { "include": "#keyword" }
             ]
         },
         "preprocessors": {
@@ -53,7 +55,7 @@
             "name": "constant.language"
         },
         "comment": {
-            "match": "(?://.*$|/\\*.*\\*/)",
+            "match": "(?://.*$|/\\*.*?\\*/)",
             "name": "comment"
         },
         "comment-block": {
@@ -62,11 +64,11 @@
             "name": "comment"
         },
         "keyword": {
-            "match": "(?i)\\b(?:class|const|float|funcref|func|instance|int|other|prototype|return|string|this|var|void)\\b",
+            "match": "(?i)\\b(?:class|const|float|funcref|func|instance|int|other|prototype|return|string|this|var|void|while|continue|end|break)\\b",
             "name": "keyword.control"
         },
         "classes": {
-            "match": "(?i)\\b(?:c_npc|c_item)\\b",
+            "match": "(?i)\\b(?:[\\w_]+)\\b",
             "name": "entity.name.class"
         },
         "strings": {
@@ -118,6 +120,7 @@
                 "1": { "name": "keyword.control" }
             },
             "patterns": [
+                { "include": "#var-def-lang" },
                 { "include": "#var-def" },
                 { "include": "#expression" }
             ]
@@ -130,6 +133,7 @@
                 "2": { "name": "entity.name.class" }
             },
             "patterns": [
+                { "include": "#var-def-lang" },
                 { "include": "#var-def" },
                 { "include": "#comments" }
             ]
@@ -164,8 +168,21 @@
                 { "include": "#comment-block" }
             ]
         },
-        "var-def": {
-            "begin": "(?i)(var|const)(?=\\s+\\w+\\s+\\w+)",
+        "var-def-array": {
+            "begin": "(?i)(var|const)(?=\\s+(int|string)\\s+\\w+\\s*\\[\\d+\\]\\s*=\\s*{)",
+            "beginCaptures": {
+                "0": { "name": "punctuation.definition.variable" },
+                "1": { "name": "keyword.control" }
+            },
+            "end": ";",
+            "patterns": [
+                { "include": "#comment-block" },
+                { "include": "#constant-values" },
+                { "include": "#keyword" }
+            ]
+        },
+        "var-def-lang": {
+            "begin": "(?i)(var|const)(?=\\s+(int|string)\\s+\\w+)",
             "beginCaptures": {
                 "0": { "name": "punctuation.definition.variable" },
                 "1": { "name": "keyword.control" }
@@ -174,8 +191,21 @@
             "patterns": [
                 { "include": "#comment-block" },
                 { "include": "#constant-values" },
-                { "include": "#keyword" },
-                { "include": "#classes" }
+                { "include": "#keyword" }
+            ]
+        },
+        "var-def": {
+            "begin": "(?i)(var|const)\\s+([\\w_]+)(?=\\s+[\\w_]+)",
+            "beginCaptures": {
+                "0": { "name": "punctuation.definition.variable" },
+                "1": { "name": "keyword.control" },
+                "2": { "name": "entity.name.class" }
+            },
+            "end": ",|\\)|;",
+            "patterns": [
+                { "include": "#comment-block" },
+                { "include": "#constant-values" },
+                { "include": "#keyword" }
             ]
         },
         "func-def": {
