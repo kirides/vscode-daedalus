@@ -8,3 +8,5 @@ lsp-log.txt
 node_modules/
 completion/
 webpack.config.js
+languageserver/dotnetlsp/
+**/*.bak

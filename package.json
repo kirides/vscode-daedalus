@@ -19,9 +19,9 @@
     "ia32"
   ],
   "license": "MIT",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "engines": {
-    "vscode": ">=1.43.0"
+    "vscode": ">=1.48.0"
   },
   "publisher": "Kirides",
   "activationEvents": [
