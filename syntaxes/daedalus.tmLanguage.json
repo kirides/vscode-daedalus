@@ -43,7 +43,7 @@
             "name": "meta.preprocessor"
         },
         "constant-num": {
-            "match": "\\b\\d+\\.?\\d*|\\B\\.\\d+",
+            "match": "(\\b\\d+\\.?\\d*|\\B\\.\\d+(?:\\s*,\\s*)*)+",
             "name": "constant.numeric"
         },
         "constant-bool": {
@@ -64,7 +64,7 @@
             "name": "comment"
         },
         "keyword": {
-            "match": "(?i)\\b(?:class|const|float|funcref|func|instance|int|prototype|return|string|this|var|void|while|continue|end|break)\\b",
+            "match": "(?i)\\b(?:class|const|float|funcref|func|instance|int|prototype|return|repeat|string|this|var|void|while|continue|end|break)\\b",
             "name": "keyword.control"
         },
         "classes": {
@@ -101,7 +101,7 @@
         },
         "else-if": {
             "begin": "(?i)\\b(else\\s+if)\\b",
-            "end": "(?=(}\\s*;|}))",
+            "end": "(?=(}\\s*;))",
             "beginCaptures": {
                 "0": { "name": "entity.statement.else-if" },
                 "1": { "name": "keyword.control" }
@@ -114,7 +114,7 @@
         },
         "else": {
             "begin": "(?i)\\b(else)\\b",
-            "end": "(?=(}\\s*;|}))",
+            "end": "(?=(}\\s*;))",
             "beginCaptures": {
                 "0": { "name": "entity.statement.else" },
                 "1": { "name": "keyword.control" }
@@ -168,6 +168,15 @@
                 { "include": "#comment-block" }
             ]
         },
+        "const-array-values": {
+            "begin": "{",
+            "end": "}",
+            "patterns": [
+                { "include": "#comment-block" },
+                { "include": "#constant-values" },
+                { "include": "#keyword" }
+            ]
+        },
         "var-def-array": {
             "begin": "(?i)(var|const)(?=\\s+(int|string)\\s+\\w+\\s*\\[\\d+\\]\\s*=\\s*{)",
             "beginCaptures": {
@@ -177,6 +186,7 @@
             "end": ";",
             "patterns": [
                 { "include": "#comment-block" },
+                { "include": "#const-array-values" },
                 { "include": "#constant-values" },
                 { "include": "#keyword" }
             ]
@@ -210,7 +220,7 @@
         },
         "func-def": {
             "begin": "(?i)\\b([Ff][Uu][Nn][Cc])\\s+(\\w+)(?=\\s+[\\w@^]+\\s*\\()",
-            "end": "};",
+            "end": "}\\s*;",
             "beginCaptures": {
                 "0": { "name": "entity.function" },
                 "1": { "name": "keyword" },
