@@ -47,11 +47,11 @@
             "name": "constant.numeric"
         },
         "constant-bool": {
-            "match": "TRUE|FALSE",
+            "match": "(?i)TRUE|FALSE",
             "name": "constant.numeric"
         },
         "constant-lang": {
-            "match": "\\b(?:null|self|hero|item|other|victim)\\b",
+            "match": "(?i)\\b(?:null|self|hero|item|other|victim)\\b",
             "name": "constant.language"
         },
         "comment": {
@@ -84,7 +84,7 @@
         },
         "if": {
             "begin": "(?i)\\b(if)\\b",
-            "end": "};",
+            "end": "}\\s*;",
             "beginCaptures": {
                 "0": { "name": "entity.statement.if" },
                 "1": { "name": "keyword.control" }
@@ -101,7 +101,7 @@
         },
         "else-if": {
             "begin": "(?i)\\b(else\\s+if)\\b",
-            "end": "(?=(};|}))",
+            "end": "(?=(}\\s*;|}))",
             "beginCaptures": {
                 "0": { "name": "entity.statement.else-if" },
                 "1": { "name": "keyword.control" }
@@ -114,7 +114,7 @@
         },
         "else": {
             "begin": "(?i)\\b(else)\\b",
-            "end": "(?=(};|}))",
+            "end": "(?=(}\\s*;|}))",
             "beginCaptures": {
                 "0": { "name": "entity.statement.else" },
                 "1": { "name": "keyword.control" }
@@ -127,7 +127,7 @@
         },
         "class-declaration": {
             "begin": "(?i)(?<=class)\\s+([\\w_]+)(?:\\s*\\(([\\w+_]+)\\))?",
-            "end": "};",
+            "end": "}\\s*;",
             "beginCaptures": {
                 "1": { "name": "entity.name.class" },
                 "2": { "name": "entity.name.class" }
@@ -140,7 +140,7 @@
         },
         "instance-declaration": {
             "begin": "(?i)(?<=prototype|instance)\\s+([\\w@_]+)\\s*(?:\\(([\\w@_]+)\\))?",
-            "end": "};",
+            "end": "}\\s*;",
             "beginCaptures": {
                 "1": { "name": "entity.name.class" },
                 "2": { "name": "entity.name.class" },
