@@ -1,6 +1,7 @@
-/node_modules/
-/out/
-/languageserver
+node_modules/*
+out/*
+languageserver/*
+!languageserver/DaedalusBuiltins/
 *.vsix
 *.7z
 *.zip
