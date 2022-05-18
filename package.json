@@ -19,7 +19,7 @@
     "ia32"
   ],
   "license": "MIT",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "engines": {
     "vscode": ">=1.65.0"
   },
