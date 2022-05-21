@@ -1,0 +1,69 @@
+{  
+    "scopeName": "source.modelscript",
+    "patterns": [
+        { "include": "#comments"},
+        { "include": "#keywords"},
+        { "include": "#strings"},
+        { "include": "#constant-num"}
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                { "include": "#comment" },
+                { "include": "#comment-block" }
+            ]
+        },
+        "keywords" : {
+            "patterns": [
+                { "include": "#keyword_main"},
+                { "include": "#keyword_anis"},
+                { "include": "#keyword_dir"},
+                { "include": "#keyword_anicontrol"},
+                { "include": "#keyword-mesh"},
+                { "include": "#keyword-eff"}
+            ]
+        },
+        "comment": {
+            "match": "(?://.*$|/\\*.*?\\*/)",
+            "name": "comment"
+        },
+        "comment-block": {
+            "begin": "/\\*",
+            "end": "\\*/",
+            "name": "comment"
+        },
+        "keyword_main": {
+            "match": "(?i)\\b(?:model|anienum)\\b",
+            "name": "keyword.control"
+        },
+        "keyword_anis": {
+            "match": "(?i)\\b(?:ani|aniAlias|aniBlend|aniComb|aniDisable)\\b",
+            "name": "entity.name.function"
+        },
+        "keyword_dir": {
+            "match": "\\b(?:F|R)\\b",
+            "name": "entity.name.type"
+        },
+        "keyword_anicontrol": {
+            "match": "\\b(?:DONT_USE_MESH|FPS:|SPD:|CVS:|ATTACH)\\b",
+            "name": "entity.name.tag"
+        },
+        "keyword-mesh": {
+            "match": "(?i)\\b(?:meshAndTree|registerMesh)\\b",
+            "name": "entity.other.inherited-class"
+        },
+        "keyword-eff": {
+            "match": "(?i)\\b(?:eventSFXGrnd|eventSFX|EVENTSWAPMESH|EVENTTAG|EVENTPFXSTOP|EVENTPFXGRND|EVENTPFX|EVENTSETMESH|EVENTMMSTARTANI|EVENTCAMTREMOR)",
+            "name": "entity.other.attribute-name"
+        },
+        "strings": {
+            "match": "\".*?\"|'.*?'",
+            "name": "string"
+        },
+        "constant-num": {
+            "match": "(\\b\\d+\\.?\\d*|\\B\\.\\d+(?:\\s*,\\s*)*)+",
+            "name": "constant.numeric"
+        }
+        
+    }
+}
