@@ -1,3 +1,7 @@
+# VS Code Daedalus extension
+
+A Visual Studio Code extension for the scripting language Daedalus and ModelScript used by the games Gothic and Gothic II.
+
 ## Usage
 
 Open a directory that contains any of the following files:
