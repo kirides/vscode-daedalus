@@ -6,6 +6,7 @@
 
 import * as vscode from 'vscode';
 import * as path from 'path';
+import * as os from 'os';
 import { ServerOptions, LanguageClient, LanguageClientOptions } from 'vscode-languageclient/lib/node/main'
 import { Trace } from 'vscode-jsonrpc';
 
@@ -13,6 +14,17 @@ const LANGUAGE: string = "daedalus";
 
 export function activate(context: vscode.ExtensionContext) {
 	let serverExe = path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer.exe');
+
+	if(os.hostname()) {
+		var hostname = os.platform();
+		if (hostname == 'win32') { // windows
+			serverExe = path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer.exe');
+		} else if (hostname == 'darwin') { // macOS 
+			serverExe = path.join(context.extensionPath, 'languageserver', 'dls_darwin');
+		} else if (hostname == 'linux') { // linux
+			serverExe = path.join(context.extensionPath, 'languageserver', 'dls_linux');
+		}
+	}
 
 	let serverOptions: ServerOptions = {
 		run: { command: serverExe },

@@ -12,14 +12,16 @@
   "displayName": "Daedalus (Gothic/II)",
   "homepage": "https://github.com/Kirides/vscode-daedalus",
   "os": [
-    "win32"
+    "win32",
+    "darwin"
   ],
   "cpu": [
     "x64",
-    "ia32"
+    "ia32",
+    "arm64"
   ],
   "license": "MIT",
-  "version": "0.0.15",
+  "version": "0.0.17",
   "engines": {
     "vscode": ">=1.65.0"
   },
@@ -30,7 +32,7 @@
   "contributes": {
     "configurationDefaults": {
       "[daedalus]": {
-        "files.encoding": "windows1252"
+        "files.encoding": "windows1250"
       }
     },
     "languages": [
@@ -45,6 +47,18 @@
           "D"
         ],
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "modelscript",
+        "aliases": [
+          "Modelscript",
+          "modelscript"
+        ],
+        "extensions": [
+          "mds",
+          "MDS"
+        ],
+        "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
@@ -52,12 +66,21 @@
         "language": "daedalus",
         "scopeName": "source.daedalus",
         "path": "./syntaxes/daedalus.tmLanguage.json"
+      },
+      {
+        "language": "modelscript",
+        "scopeName": "source.modelscript",
+        "path": "./syntaxes/modelscript.tmLanguage.json"
       }
     ],
     "snippets": [
       {
         "language": "daedalus",
         "path": "./snippets/daedalus.json"
+      },
+      {
+        "language": "modelscript",
+        "path": "./snippets/modelscript.json"
       }
     ]
   },
