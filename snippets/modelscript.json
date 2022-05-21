@@ -1,0 +1,62 @@
+{
+	"model-statement": {
+		"prefix": "Model",
+		"body": [
+			"Model (\"${1:ModelName}\")",
+			"{",
+			"\t$0",
+			"}"
+		],
+		"description": "Encloses the model script file"
+	},
+	"mesh-and-tree": {
+		"prefix": "Mesh",
+		"body": [
+			"MeshAndTree (\"${1:BoneHierarchyASCFile}.ASC\" DONT_USE_MESH)",
+			"$0"
+		],
+		"description": "Defines the bone hierarchy to be used"
+	},
+	"register-mesh": {
+		"prefix": "register",
+		"body": [
+			"registerMesh (\"${1:MeshASCFile}.ASC\")",
+			"$0"
+		],
+		"description": "Registers mesh to be used with the bone hierarchy specified using MeshAndTree"
+	},
+	"ani-enum": {
+		"prefix": "AniEnum",
+		"body": [
+			"aniEnum",
+			"{",
+			"\t$0",
+			"}"
+		],
+		"description": "Contains all animation script definitions"
+	},
+	"ani": {
+		"prefix": "ani",
+		"body": [
+			"ani\t(\"${1:ANI_NAME}\"\t${2:LAYER}\t\"${3:NEXT_ANI}\"\t${4:BLEND_IN}\t${5:BLEND_OUT}\t${6:FLAGS}\t\"${7:ASC_NAME}.ASC\"\t${8|F,R|}\t${9:START_FRAME}\t${10:END_FRAME})",
+			"$0"
+		],
+		"description": "Define new animation"
+	},
+	"ani-alias": {
+		"prefix": "anialias",
+		"body": [
+			"aniAlias\t(\"${1:ANI_NAME}\"\t${2:LAYER}\t\"${3:NEXT_ANI}\"\t${4:BLEND_IN}\t${5:BLEND_OUT}\t${6:FLAGS}\t\"${7:ALIAS_NAME}\"\t${8|F,R|})",
+			"$0"
+		],
+		"description": "Define new animation as an alias to an already defined animation"
+	},
+	"ani-blend": {
+		"prefix": "aniblend",
+		"body": [
+			"aniBlend\t(\"${1:ANI_NAME1}\"\t\"${2:ANI_NAME2}\"\t${4:BLEND_IN}\t${5:BLEND_OUT})",
+			"$0"
+		],
+		"description": "Set the blend times between two animations"
+	}
+}
