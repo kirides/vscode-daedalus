@@ -22,6 +22,17 @@ export function activate(context: vscode.ExtensionContext) {
 		serverExe = path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer_darwin');
 	};
 
+	if(os.hostname()) {
+		var hostname = os.platform();
+		if (hostname == 'win32') { // windows
+			serverExe = path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer.exe');
+		} else if (hostname == 'darwin') { // macOS 
+			serverExe = path.join(context.extensionPath, 'languageserver', 'dls_darwin');
+		} else if (hostname == 'linux') { // linux
+			serverExe = path.join(context.extensionPath, 'languageserver', 'dls_linux');
+		}
+	}
+
 	let serverOptions: ServerOptions = {
 		run: { command: serverExe, args: ["-loglevel", "info"] },
 		debug: { command: serverExe, args: ["-loglevel", "debug"] }
