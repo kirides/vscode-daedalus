@@ -13,7 +13,8 @@
   "homepage": "https://github.com/Kirides/vscode-daedalus",
   "os": [
     "win32",
-    "darwin"
+    "darwin",
+    "linux"
   ],
   "cpu": [
     "x64",
