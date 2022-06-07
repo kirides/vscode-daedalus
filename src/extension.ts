@@ -6,17 +6,25 @@
 
 import * as vscode from 'vscode';
 import * as path from 'path';
+import * as os from 'os';
 import { ServerOptions, LanguageClient, LanguageClientOptions } from 'vscode-languageclient/lib/node/main'
 import { Trace } from 'vscode-jsonrpc';
 
 const LANGUAGE: string = "daedalus";
 
 export function activate(context: vscode.ExtensionContext) {
-	let serverExe = path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer.exe');
+	const platform = os.platform();
+	
+	let serverExe = path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer');
+	if (platform === 'win32') {
+		serverExe = path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer.exe');
+	} else if (platform === 'darwin') {
+		serverExe = path.join(context.extensionPath, 'languageserver', 'DaedalusLanguageServer_darwin');
+	};
 
 	let serverOptions: ServerOptions = {
-		run: { command: serverExe },
-		debug: { command: serverExe }
+		run: { command: serverExe, args: ["-loglevel", "info"] },
+		debug: { command: serverExe, args: ["-loglevel", "debug"] }
 	}
 
 	// Options to control the language client
@@ -26,7 +34,10 @@ export function activate(context: vscode.ExtensionContext) {
 			{ language: LANGUAGE, },
 			{ pattern: '**/*.d', },
 			{ pattern: '**/*.D', }
-		]
+		],
+		synchronize: {
+			configurationSection: 'daedalusLanguageServer',
+		}
 	}
 
 	// Create the language client and start the client.

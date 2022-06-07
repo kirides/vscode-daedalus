@@ -19,7 +19,7 @@
     "ia32"
   ],
   "license": "MIT",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "engines": {
     "vscode": ">=1.65.0"
   },
@@ -28,9 +28,22 @@
     "onLanguage:daedalus"
   ],
   "contributes": {
-    "configurationDefaults": {
-      "[daedalus]": {
-        "files.encoding": "windows1252"
+    "configuration": {
+      "type": "object",
+      "title": "Language Server Configuration",
+      "properties": {
+        "daedalusLanguageServer.fileEncoding": {
+          "type": "string",
+          "default": "Windows-1252",
+          "enum": ["Windows-1250", "Windows-1251", "Windows-1252"],
+          "description": "The file encoding"
+        },
+        "daedalusLanguageServer.srcFileEncoding": {
+          "type": "string",
+          "default": "Windows-1252",
+          "enum": ["Windows-1250", "Windows-1251", "Windows-1252"],
+          "description": "The file encoding"
+        }
       }
     },
     "languages": [
