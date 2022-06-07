@@ -1,3 +1,4 @@
+/// Global instance, hold the player character
 var C_NPC hero;
 var C_NPC self;
 var C_NPC other;
@@ -5,11 +6,24 @@ var C_NPC victim;
 var C_ITEM item;
 var instance NULL;
 var instance instance_help;
-func string IntToString(var int par0) {};
-func string FloatToString(var float par0) {};
+/// Converts integer to string
+/// 
+/// @param integer input integer number
+/// @return number converted to string
+func string IntToString(var int integer) {};
+/// Converts float to string
+/// 
+/// @param floating input floating point number
+/// @return floating point number converted to string
+func string FloatToString(var float floating) {};
 func int FloatToInt(var float par0) {};
 func float IntToFloat(var int par0) {};
-func string ConcatStrings(var string par0, var string par1) {};
+/// Concatenates two strings
+///
+/// @param s1 string #1
+/// @param s2 string #2
+/// @return concatenated string
+func string ConcatStrings(var string s1, var string s2) {};
 func void Print(var string par0) {};
 func void PrintDebug(var string par0) {};
 func int PrintScreen(var string par0, var int par1, var int par2, var string par3, var int par4) {};
@@ -55,12 +69,31 @@ func void Npc_CreateSpell(var instance par0, var int par1) {};
 func void Npc_LearnSpell(var instance par0, var int par1) {};
 func int Npc_HasItems(var instance par0, var int par1) {};
 func void Npc_GiveItem(var instance par0, var int par1, var instance par2) {};
-func void CreateInvItem(var instance par0, var int par1) {};
+/// Create one item in NPC's inventory
+///
+/// @param npc target NPC
+/// @param itemInstance item to be created
+func void CreateInvItem(var instance npc, var int itemInstance) {};
+/// Creates specific number of items in NPC's inventory
+///
+/// @param npc target NPC
+/// @param itemInstance item to be created
 func void CreateInvItems(var instance par0, var int par1, var int par2) {};
-func int Npc_GetInvItem(var c_npc self, var int iteminstance) {};
+func int Npc_GetInvItem(var c_npc self, var int itemInstance) {};
 func int Npc_GetInvItembyslot(var c_npc self, var int category, var int slotnr) {};
-func int Npc_RemoveInvItem(var C_NPC npc, var int par1) {};
-func int Npc_RemoveInvItems(var C_NPC npc, var int par1, var int par2) {};
+/// Removes one item from NPC's inventory
+///
+/// @param npc target NPC
+/// @param itemInstance item to be removed
+/// @return boolean: `TRUE` - removal successful, `FALSE` - removal failed
+func int Npc_RemoveInvItem(var C_NPC npc, var int itemInstance) {};
+/// Removes specific number of items from NPC's inventory
+///
+/// @param npc target NPC
+/// @param itemInstance item to be removed
+/// @param count number of items to be removed
+/// @return boolean: `TRUE` - removal successful, `FALSE` - removal failed
+func int Npc_RemoveInvItems(var C_NPC npc, var int itemInstance, var int count) {};
 func void Npc_ClearInventory(var C_NPC npc) {};
 func int Npc_IsInState(var C_NPC npc, var func par1) {};
 func int Npc_WasInState(var C_NPC npc, var func par1) {};
@@ -98,7 +131,12 @@ func void AI_StartState(var instance par0, var func par1, var int par2, var stri
 func void AI_ContinueRoutine(var instance par0) {};
 func int Npc_GetStateTime(var instance par0) {};
 func void Npc_SetStateTime(var instance par0, var int par1) {};
-func void AI_Output(var instance par0, var instance par1, var string par2) {};
+/// Plays back the dialogue with corresponidng id
+///
+/// @param npc0 NPC saying the dialogue
+/// @param npc1 NPC listening
+/// @param id string id = sound file name
+func void AI_Output(var instance npc0, var instance npc1, var string id) {};
 func void AI_OutputSvm(var instance par0, var instance par1, var string par2) {};
 func void AI_OutputSvm_Overlay(var instance par0, var instance par1, var string par2) {};
 func void AI_PlayCutscene(var instance par0, var string par1) {};
@@ -164,9 +202,22 @@ func void Npc_ClearAiQueue(var instance par0) {};
 func int InfoManager_Hasfinished() {};
 func void AI_StopProcessInfos(var instance par0) {};
 func void AI_ProcessInfos(var instance par0) {};
-func void info_AddChoice(var int par0, var string par1, var func par2) {};
-func void info_ClearChoices(var int par0) {};
-func int Npc_KnowsInfo(var instance par0, var int par1) {};
+/// Adds a new choice to a dialogue instance
+///
+/// @param dialogueInstance dialogue instance to attach the choices to
+/// @param description text to be shown in the dialogue box
+/// @param function function to be run on choice selection
+func void Info_AddChoice(var int dialogueInstance, var string description, var func function) {};
+/// Clears all choices attached to specified dialogue instance
+///
+/// @param dialogueInstance this dialogue instance will have the all choices cleared 
+func void Info_ClearChoices(var int dialogueInstance) {};
+/// Check whether NPC has heard the specified dialogue
+/// _Note: Doesn't work on `permanent` dialogues in vanilla game_
+///
+/// @param npc NPC to check (actually not used)
+/// @param dialogueInstance C_INFO dialogue instance
+func int Npc_KnowsInfo(var instance npc, var int dialogueInstance) {};
 func int Npc_CheckInfo(var instance par0, var int par1) {};
 func int Npc_GiveInfo(var instance par0, var int par1) {};
 func int Npc_GetTalentSkill(var instance par0, var int par1) {};
@@ -225,7 +276,12 @@ func void AI_WaitForQuestion(var instance par0, var func par1) {};
 func int Hlp_IsItem(var instance par0, var int par1) {};
 func int Hlp_GetInstanceId(var instance par0) {};
 func int Hlp_Random(var int par0) {};
-func int Hlp_StrCmp(var string par0, var string par1) {};
+/// Compares two strings
+///
+/// @param s1 string #1
+/// @param s2 string #2
+/// @return `TRUE` when the strings are the same, `FALSE` otherwise
+func int Hlp_StrCmp(var string s1, var string s2) {};
 func instance Hlp_GetNpc(var int par0) {};
 func int Hlp_IsValidNpc(var instance par0) {};
 func int Hlp_IsValidItem(var instance par0) {};
@@ -240,9 +296,21 @@ func int Npc_CanSeeSource(var instance par0) {};
 func int Mis_GetStatus(var int par0) {};
 func void Mis_SetStatus(var int par0, var int par1) {};
 func int Mis_OnTime(var int par0) {};
-func void Log_CreateTopic(var string par0, var int par1) {};
-func void Log_AddEntry(var string par0, var string par1) {};
-func void Log_SetTopicStatus(var string par0, var int par1) {};
+/// Creates a new log topic with the name `topicName` under the section `logSection`
+/// 
+/// @param topicName unique string used to identifiy and name the topic
+/// @param logSection indicates in which section to screate the topic in. Takes these constans - `LOG_MISSION`, `LOG_NOTE`
+func void Log_CreateTopic(var string topicName, var int logSection) {};
+/// Adds an entry to a log topic with the name `topicName` under the section `logSection`
+/// 
+/// @param topicName unique string used to identifiy and name the topic
+/// @param entry content of the new entry
+func void Log_AddEntry(var string topicName, var string entry) {};
+/// Changes the status of the topic with the name `topicName`
+///
+/// @param topicName unique string used to identifiy and name the topic
+/// @param status the status to be set - `LOG_RUNNING`, `LOG_SUCCESS`, `LOG_FAILED`, `LOG_OBSOLETE`
+func void Log_SetTopicStatus(var string topicName, var int status) {};
 func void Mis_AddMissionEntry(var instance par0, var string par1) {};
 func void Mis_RemoveMission(var instance par0) {};
 func int Npc_CheckAvailableMission(var instance par0, var int par1, var int par2) {};
@@ -279,7 +347,13 @@ func int Wld_RemoveItem(var instance par0) {};
 func void Wld_ExchangeGuildAttitudes(var string par0) {};
 func void Wld_SetObjectRoutine(var int par0, var int par1, var string par2, var int par3) {};
 func void Wld_SetMobRoutine(var int par0, var int par1, var string par2, var int par3) {};
-func void Wld_SendTrigger(var string par0) {};
+/// Triggers (turns on) a trigger with name `trigerName`
+///
+/// @param trigerName name of the trigger
+func void Wld_SendTrigger(var string trigerName) {};
+/// Untriggers (turns off) a trigger with name `trigerName`
+///
+/// @param trigerName name of the trigger
 func void Wld_SendUntrigger(var string par0) {};
 func int Npc_OwnedByNpc(var instance par0, var instance par1) {};
 func int Npc_OwnedByGuild(var instance par0, var int par1) {};
