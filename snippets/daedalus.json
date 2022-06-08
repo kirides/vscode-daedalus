@@ -46,5 +46,41 @@
 			"};"
 		],
 		"description": "If-Statement"
+	},
+	"Function": {
+		"prefix": [ "func", "function"],
+		"body": [
+			"func ${1|void,int,string|} ${2:Function name} (${3:Parameters})",
+			"{",
+			"\t$0",
+			"};"
+		],
+		"description": "function template"
+	},
+	"Dialogue": {
+		"prefix": [ "c_info", "dialogue", "dia"],
+		"body": [
+			"instance $1_${2:Dialog name}(C_INFO)",
+			"{",
+			"\tnpc         = ${1:NPC instance};",
+			"\tnr          = ${3:Dialog number};",
+			"\tcondition   = $1_$2_Condition;",
+			"\tinformation = $1_$2_Info;",
+			"\tpermanent   = ${4|TRUE,FALSE|};",
+			"\tdescription = \"${5:Dialog description}\";",
+			"};\n",
+
+			"func int $1_$2_Condition()",
+			"{",
+			"\t$6",
+			"};\n",
+			
+			"func void $1_$2_Info()",
+			"{",
+			"\t$0",
+			"};"
+
+		],
+		"description": "C_INFO template"
 	}
 }
