@@ -3,23 +3,16 @@
   "description": "Daedalus Language Support",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kirides/vscode-daedalus.git"
+    "url": "https://github.com/kirides/vscode-daedalus.git"
   },
   "author": {
     "name": "Kirides",
-    "url": "https://github.com/Kirides/"
+    "url": "https://github.com/kirides/"
   },
   "displayName": "Daedalus (Gothic/II)",
-  "homepage": "https://github.com/Kirides/vscode-daedalus",
-  "os": [
-    "win32"
-  ],
-  "cpu": [
-    "x64",
-    "ia32"
-  ],
+  "homepage": "https://github.com/kirides/vscode-daedalus",
   "license": "MIT",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "engines": {
     "vscode": ">=1.65.0"
   },
@@ -28,9 +21,14 @@
     "onLanguage:daedalus"
   ],
   "contributes": {
+    "configurationDefaults": {
+			"[daedalus]": {
+				"files.encoding": "windows1252"
+			}
+		},
     "configuration": {
       "type": "object",
-      "title": "Language Server Configuration",
+      "title": "Daedalus",
       "properties": {
         "daedalusLanguageServer.fileEncoding": {
           "type": "string",

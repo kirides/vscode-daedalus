@@ -240,9 +240,21 @@ func int Npc_CanSeeSource(var instance par0) {};
 func int Mis_GetStatus(var int par0) {};
 func void Mis_SetStatus(var int par0, var int par1) {};
 func int Mis_OnTime(var int par0) {};
-func void Log_CreateTopic(var string par0, var int par1) {};
-func void Log_AddEntry(var string par0, var string par1) {};
-func void Log_SetTopicStatus(var string par0, var int par1) {};
+/// Creates a new log topic with the name `topicName` under the section `logSection`
+/// 
+/// @param topicName unique string used to identifiy and name the topic
+/// @param logSection [LOG_MISSION, LOG_NOTE] indicates in which section to create the topic
+func void Log_CreateTopic(var string topicName, var int logSection) {};
+/// Creates a new log topic with the name `topicName` under the section `logSection`
+/// 
+/// @param topicName unique string used to identifiy and name the topic
+/// @param text the text
+func void Log_AddEntry(var string topicName, var string text) {};
+/// Creates a new log topic with the name `topicName` under the section `logSection`
+/// 
+/// @param topicName unique string used to identifiy and name the topic
+/// @param status [LOG_RUNNING, LOG_SUCCESS, LOG_FAILED, LOG_OBSOLETE] the new status
+func void Log_SetTopicStatus(var string topicName, var int status) {};
 func void Mis_AddMissionEntry(var instance par0, var string par1) {};
 func void Mis_RemoveMission(var instance par0) {};
 func int Npc_CheckAvailableMission(var instance par0, var int par1, var int par2) {};
