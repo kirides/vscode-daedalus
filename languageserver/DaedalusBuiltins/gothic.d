@@ -107,17 +107,8 @@ func void AI_Wait(var instance par0, var float par1) {};
 func void AI_WaitMs(var instance par0, var int par1) {};
 func void AI_WaitTillEnd(var instance par0, var instance par1) {};
 func void AI_AlignToWP(var instance par0) {};
-/// @slf - Target Npc  
-/// @walkMode - The Walkmode, one of the values below
-/// 
-/// Constant           | Value
-/// ---                | ---
-/// `NPC_RUN`          | 0
-/// `NPC_WALK`         | 1
-/// `NPC_SNEAK`	       | 2
-/// `NPC_RUN_WEAPON`   | 0 + 128
-/// `NPC_WALK_WEAPON`  | 1 + 128
-/// `NPC_SNEAK_WEAPON` | 2 + 128
+/// @param slf Target Npc  
+/// @param walkMode [NPC_RUN, NPC_WALK, NPC_SNEAK, NPC_RUN_WEAPON, NPC_WALK_WEAPON, NPC_SNEAK_WEAPON] The Walkmode
 func void AI_SetWalkMode(var instance slf, var int walkMode) {};
 func void AI_PlayAni(var instance par0, var string par1) {};
 func void AI_PlayAniBS(var instance par0, var string par1, var int par2) {};
