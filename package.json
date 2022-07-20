@@ -21,26 +21,28 @@
     "onLanguage:daedalus"
   ],
   "contributes": {
-    "configurationDefaults": {
-			"[daedalus]": {
-				"files.encoding": "windows1252"
-			}
-		},
     "configuration": {
       "type": "object",
       "title": "Daedalus",
       "properties": {
+        "daedalusLanguageServer.daedalusEncoding": { 
+          "type": "string",
+          "default": "windows1252",
+          "enum": ["windows1250", "windows1251", "windows1252"],
+          "markdownEnumDescriptions": ["*Central European* (Windows 1250)" , "*Cyrillic* (Windows 1251)", "*Western* (Windows 1252)"],
+          "markdownDescription": "Default editor file encoding"
+        },
         "daedalusLanguageServer.fileEncoding": {
           "type": "string",
           "default": "Windows-1252",
           "enum": ["Windows-1250", "Windows-1251", "Windows-1252"],
-          "description": "The file encoding"
+          "description": "Server side script file encoding (`*.d` files)."
         },
         "daedalusLanguageServer.srcFileEncoding": {
           "type": "string",
           "default": "Windows-1252",
           "enum": ["Windows-1250", "Windows-1251", "Windows-1252"],
-          "description": "The file encoding"
+          "description": "Server side source file encoding (`*.src` files)."
         }
       }
     },
