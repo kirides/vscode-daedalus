@@ -12,11 +12,14 @@ import { Trace } from 'vscode-jsonrpc';
 import { stringify } from 'querystring';
 import { log } from 'console';
 import { exec, execFileSync } from 'child_process';
+import { ConfigurationTarget, workspace } from 'vscode';
 
 const LANGUAGE: string = "daedalus";
 interface Dictionary<T> {
     [Key: string]: T;
 }
+
+const CONFIGSEC: string = "daedalusLanguageServer";
 
 export function activate(context: vscode.ExtensionContext) {
 	const lspPath = path.join(context.extensionPath, 'languageserver');
@@ -65,6 +68,25 @@ export function activate(context: vscode.ExtensionContext) {
 			configurationSection: 'daedalusLanguageServer',
 		}
 	}
+
+	// On activation set settings from workspace settings (if not set from global settings)
+	let newSetting = workspace.getConfiguration(CONFIGSEC).get('daedalusEncoding');
+	log("Global or workspace encoding found on start: %s", newSetting);
+	workspace.getConfiguration("files").update("encoding", newSetting, false, undefined);
+
+	// Change workspace encoding setting on config change
+	workspace.onDidChangeConfiguration(event => {
+		const configurationWorkspace = workspace.getConfiguration(CONFIGSEC);
+
+		let affected = event.affectsConfiguration(CONFIGSEC);
+		if (affected) {
+			let newSetting = configurationWorkspace.get('daedalusEncoding');
+
+			log("Setting new encoding: %s", newSetting);
+
+			workspace.getConfiguration("files").update("encoding", newSetting, false, undefined);
+		}
+	})
 
 	// Create the language client and start the client.
 	const client = new LanguageClient('daedalusLanguageServer', 'Daedalus Language Server', serverOptions, clientOptions);
