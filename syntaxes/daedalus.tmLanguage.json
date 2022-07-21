@@ -172,6 +172,7 @@
             "begin": "{",
             "end": "}",
             "patterns": [
+                { "include": "#comment" },
                 { "include": "#comment-block" },
                 { "include": "#constant-values" },
                 { "include": "#keyword" }
@@ -185,6 +186,7 @@
             },
             "end": ";",
             "patterns": [
+                { "include": "#comment" },
                 { "include": "#comment-block" },
                 { "include": "#const-array-values" },
                 { "include": "#constant-values" },
@@ -199,6 +201,7 @@
             },
             "end": ",|\\)|;",
             "patterns": [
+                { "include": "#comment" },
                 { "include": "#comment-block" },
                 { "include": "#constant-values" },
                 { "include": "#keyword" }
@@ -213,6 +216,7 @@
             },
             "end": ",|\\)|;",
             "patterns": [
+                { "include": "#comment" },
                 { "include": "#comment-block" },
                 { "include": "#constant-values" },
                 { "include": "#keyword" }
