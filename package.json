@@ -56,6 +56,18 @@
           "D"
         ],
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "modelscript",
+        "aliases": [
+          "Modelscript",
+          "modelscript"
+        ],
+        "extensions": [
+          "mds",
+          "MDS"
+        ],
+        "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
@@ -63,12 +75,21 @@
         "language": "daedalus",
         "scopeName": "source.daedalus",
         "path": "./syntaxes/daedalus.tmLanguage.json"
+      },
+      {
+        "language": "modelscript",
+        "scopeName": "source.modelscript",
+        "path": "./syntaxes/modelscript.tmLanguage.json"
       }
     ],
     "snippets": [
       {
         "language": "daedalus",
         "path": "./snippets/daedalus.json"
+      },
+      {
+        "language": "modelscript",
+        "path": "./snippets/modelscript.json"
       }
     ]
   },
