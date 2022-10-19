@@ -50,7 +50,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let serverOptions: ServerOptions = {
 		run: { command: serverExe, args: ["-loglevel", "info"] },
-		debug: { command: serverExe, args: ["-loglevel", "debug"] }
+		debug: { command: serverExe, args: ["-loglevel", "debug"] },
 	}
 
 	// Options to control the language client
@@ -63,15 +63,16 @@ export function activate(context: vscode.ExtensionContext) {
 		],
 		synchronize: {
 			configurationSection: 'daedalusLanguageServer',
-		}
+		},
 	}
 
 	// Create the language client and start the client.
 	const client = new LanguageClient('daedalusLanguageServer', 'Daedalus Language Server', serverOptions, clientOptions);
-	client.trace = Trace.Verbose;
-	let languageServerClient = client.start();
+	
+	client.setTrace(Trace.Verbose);
+	client.start();
 
 	context.subscriptions.push(
-		languageServerClient,
+		client,
 	);
 }

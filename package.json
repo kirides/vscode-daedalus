@@ -12,9 +12,9 @@
   "displayName": "Daedalus (Gothic/II)",
   "homepage": "https://github.com/kirides/vscode-daedalus",
   "license": "MIT",
-  "version": "0.0.20",
+  "version": "0.0.22",
   "engines": {
-    "vscode": ">=1.65.0"
+    "vscode": ">=1.70.0"
   },
   "publisher": "Kirides",
   "activationEvents": [
@@ -22,10 +22,10 @@
   ],
   "contributes": {
     "configurationDefaults": {
-			"[daedalus]": {
-				"files.encoding": "windows1252"
-			}
-		},
+      "[daedalus]": {
+        "files.encoding": "windows1252"
+      }
+    },
     "configuration": {
       "type": "object",
       "title": "Daedalus",
@@ -33,14 +33,76 @@
         "daedalusLanguageServer.fileEncoding": {
           "type": "string",
           "default": "Windows-1252",
-          "enum": ["Windows-1250", "Windows-1251", "Windows-1252"],
-          "description": "The file encoding"
+          "enum": [
+            "Windows-1250",
+            "Windows-1251",
+            "Windows-1252"
+          ],
+          "markdownDescription": "file encoding for `*.d` files"
         },
         "daedalusLanguageServer.srcFileEncoding": {
           "type": "string",
           "default": "Windows-1252",
-          "enum": ["Windows-1250", "Windows-1251", "Windows-1252"],
-          "description": "The file encoding"
+          "enum": [
+            "Windows-1250",
+            "Windows-1251",
+            "Windows-1252"
+          ],
+          "markdownDescription": "file encoding for `*.src` files"
+        },
+        "daedalusLanguageServer.loglevel": {
+          "type": "string",
+          "default": "info",
+          "enum": [
+            "debug",
+            "info",
+            "warning",
+            "error"
+          ],
+          "description": "defines which logs should be outputted"
+        },
+        "daedalusLanguageServer.pprofAddr": {
+          "type": "string",
+          "default": "",
+          "examples": [
+            "",
+            "127.0.0.1:1234"
+          ],
+          "markdownDescription": "a `host:port` combination to allow debugging performance issues at `host:port/debug/pprof/`"
+        },
+        "daedalusLanguageServer.numParserThreads": {
+          "type": "number",
+          "default": 0,
+          "examples": [
+            0,
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "markdownDescription": "defines how many threads will be used for parsing sources.\n\nA value of `0` or less means \"use half of the available cores\"."
+        },
+        "daedalusLanguageServer.projectFiles": {
+          "type": "array",
+          "default": [
+            "Gothic.src",
+            "Camera.src",
+            "Menu.src",
+            "Music.src",
+            "ParticleFX.src",
+            "SFX.src",
+            "VisualFX.src"
+          ],
+          "examples": [
+            [
+              "C:\\Code\\Gothic.src"
+            ],
+            [
+              "Gothic.src"
+            ]
+          ],
+          "markdownDescription": "specify the project files.\n\n- filename-only: look up all directories up to the root and try to find the file.\n- relative/absolute path: try to find exactly these files"
         }
       }
     },
@@ -105,16 +167,16 @@
   },
   "devDependencies": {
     "@types/node": "17.0.23",
-    "@types/vscode": "1.65.0",
-    "ts-loader": "9.2.8",
-    "typescript": "4.6.3",
-    "webpack": "5.70.0",
-    "webpack-cli": "4.9.2",
-    "vsce": "2.7.0"
+    "@types/vscode": "1.70.0",
+    "ts-loader": "9.4.1",
+    "typescript": "4.8.4",
+    "vsce": "^2.11.0",
+    "webpack": "5.74.0",
+    "webpack-cli": "4.10.0"
   },
   "dependencies": {
-    "@types/glob": "7.2.0",
-    "glob": "7.2.0",
-    "vscode-languageclient": "7.0.0"
+    "@types/glob": "8.0.0",
+    "glob": "8.0.3",
+    "vscode-languageclient": "8.0.2"
   }
 }
