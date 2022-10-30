@@ -1,6 +1,6 @@
 {
   "name": "vscode-daedalus",
-  "description": "Daedalus Language Support",
+  "description": "Daedalus Language Support powered by https://github.com/kirides/DaedalusLanguageServer",
   "repository": {
     "type": "git",
     "url": "https://github.com/kirides/vscode-daedalus.git"
