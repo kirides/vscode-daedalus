@@ -12,7 +12,7 @@
   "displayName": "Daedalus (Gothic/II)",
   "homepage": "https://github.com/kirides/vscode-daedalus",
   "license": "MIT",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "engines": {
     "vscode": ">=1.70.0"
   },
@@ -103,6 +103,11 @@
             ]
           ],
           "markdownDescription": "specify the project files.\n\n- filename-only: look up all directories up to the root and try to find the file.\n- relative/absolute path: try to find exactly these files"
+        },
+		"daedalusLanguageServer.inlayHints.constants": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "toggles inlay hints for constant values"
         }
       }
     },
