@@ -12,7 +12,7 @@
   "displayName": "Daedalus (Gothic/II)",
   "homepage": "https://github.com/kirides/vscode-daedalus",
   "license": "MIT",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "engines": {
     "vscode": ">=1.70.0"
   },
