@@ -7,7 +7,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as os from 'os';
-import { ServerOptions, LanguageClient, LanguageClientOptions } from 'vscode-languageclient/lib/node/main'
+import { ServerOptions, LanguageClient, LanguageClientOptions, CodeLens } from 'vscode-languageclient/lib/node/main'
 import { Trace } from 'vscode-jsonrpc';
 import { stringify } from 'querystring';
 import { log } from 'console';
@@ -18,6 +18,27 @@ interface Dictionary<T> {
     [Key: string]: T;
 }
 
+function mapArgsToVscShowReferences(args : any[]) : (vscode.Location[] | vscode.Uri | vscode.Position)[] {
+	const locations: vscode.Location[] = args[2]
+		.map((l : any) => new vscode.Location(vscode.Uri.parse(l.uri), l.range));
+	const typedArgs = [
+		vscode.Uri.parse(args[0]), 
+		new vscode.Position(args[1].line, args[1].character),
+		locations
+	];
+	return typedArgs;
+}
+function mapLensFromLspToVscode(lens : vscode.CodeLens | null | undefined) : (vscode.CodeLens | null | undefined) {
+	if (lens) {
+		const args = lens.command?.arguments;
+		if (args && lens.command) {
+			if (lens.command.command === 'editor.action.showReferences') {
+				lens.command.arguments = mapArgsToVscShowReferences(args)
+			}
+		}
+	}
+	return lens;
+}
 export function activate(context: vscode.ExtensionContext) {
 	const lspPath = path.join(context.extensionPath, 'languageserver');
 	
@@ -64,6 +85,17 @@ export function activate(context: vscode.ExtensionContext) {
 		synchronize: {
 			configurationSection: 'daedalusLanguageServer',
 		},
+		middleware: {
+			async provideCodeLenses(document, token, next) {
+				const ret = await next(document, token);
+				ret?.map(lens => mapLensFromLspToVscode(lens));
+				return ret;
+			},
+			async resolveCodeLens(codeLens, token, next) {
+				const lens = await next(codeLens, token);
+				return mapLensFromLspToVscode(lens);
+			},
+		}
 	}
 
 	// Create the language client and start the client.
