@@ -101,7 +101,7 @@
         },
         "else-if": {
             "begin": "(?i)\\b(else\\s+if)\\b",
-            "end": "(?=(}\\s*;))",
+            "end": "(?=(}))",
             "beginCaptures": {
                 "0": { "name": "entity.statement.else-if" },
                 "1": { "name": "keyword.control" }
@@ -114,7 +114,7 @@
         },
         "else": {
             "begin": "(?i)\\b(else)\\b",
-            "end": "(?=(}\\s*;))",
+            "end": "(?=(}))",
             "beginCaptures": {
                 "0": { "name": "entity.statement.else" },
                 "1": { "name": "keyword.control" }
