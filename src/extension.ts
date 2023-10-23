@@ -7,11 +7,10 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as os from 'os';
-import { ServerOptions, LanguageClient, LanguageClientOptions, CodeLens } from 'vscode-languageclient/lib/node/main'
+import { ServerOptions, LanguageClient, LanguageClientOptions } from 'vscode-languageclient/lib/node/main'
 import { Trace } from 'vscode-jsonrpc';
-import { stringify } from 'querystring';
 import { log } from 'console';
-import { exec, execFileSync } from 'child_process';
+import { execFileSync } from 'child_process';
 
 const LANGUAGE: string = "daedalus";
 interface Dictionary<T> {
@@ -100,7 +99,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Create the language client and start the client.
 	const client = new LanguageClient('daedalusLanguageServer', 'Daedalus Language Server', serverOptions, clientOptions);
-	
 	client.setTrace(Trace.Verbose);
 	client.start();
 
