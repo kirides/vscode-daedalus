@@ -12,9 +12,9 @@
   "displayName": "Daedalus (Gothic/II)",
   "homepage": "https://github.com/kirides/vscode-daedalus",
   "license": "MIT",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "engines": {
-    "vscode": ">=1.85.0"
+    "vscode": ">=1.97.0"
   },
   "publisher": "Kirides",
   "activationEvents": [],
@@ -157,7 +157,7 @@
   "main": "./out/extension.js",
   "scripts": {
     "vscode:prepublish": "webpack --mode production",
-    "package": "vsce package",
+    "package": "npx @vscode/vsce package",
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch",
     "compile": "tsc  -p ./",
@@ -165,17 +165,16 @@
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
-    "@types/node": "20.10.6",
-    "@types/vscode": "1.85.0",
-    "ts-loader": "9.5.1",
-    "typescript": "5.3.3",
-    "vsce": "^2.15.0",
-    "webpack": "5.89.0",
-    "webpack-cli": "5.1.4"
+    "@types/node": "^22.14.0",
+    "@types/vscode": "^1.97.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "@vscode/vsce": "^2.15.0",
+    "webpack": "^5.99.5",
+    "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "@types/glob": "8.1.0",
-    "glob": "10.3.10",
-    "vscode-languageclient": "9.0.1"
+    "glob": "^11.0.1",
+    "vscode-languageclient": "^9.0.1"
   }
 }
