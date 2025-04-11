@@ -19,11 +19,6 @@
   "publisher": "Kirides",
   "activationEvents": [],
   "contributes": {
-    "configurationDefaults": {
-      "[daedalus]": {
-        "files.encoding": "windows1252"
-      }
-    },
     "configuration": {
       "type": "object",
       "title": "Daedalus",
@@ -36,6 +31,7 @@
             "Windows-1251",
             "Windows-1252"
           ],
+          "markdownEnumDescriptions": ["Windows-1250 (Czech, Polish, Hungarian, Romanian)" , "Windows-1251 (Russian, Ukrainian)", "Windows-1252 (German, English, French, Italian, Spanish)"],
           "markdownDescription": "file encoding for `*.d` files"
         },
         "daedalusLanguageServer.srcFileEncoding": {

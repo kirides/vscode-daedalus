@@ -38,6 +38,32 @@ function mapLensFromLspToVscode(lens : vscode.CodeLens | null | undefined) : (vs
 	}
 	return lens;
 }
+
+function updateFileEncoding() {
+	const config = vscode.workspace.getConfiguration();
+	const globalEncoding = config.inspect('daedalusLanguageServer.fileEncoding')?.globalValue;
+	const workspaceEncoding = config.inspect('daedalusLanguageServer.fileEncoding')?.workspaceValue;
+
+	if (workspaceEncoding !== undefined && workspaceEncoding !== globalEncoding) {
+		const encoding = config.get<string>('daedalusLanguageServer.fileEncoding');
+		if (!encoding) return;
+		config.update(
+			'[daedalus]',
+			{ 'files.encoding': encoding.toLowerCase().replace('windows-', 'windows') },
+			vscode.ConfigurationTarget.Workspace
+		);
+	} else {
+		const encoding = config.get<string>('daedalusLanguageServer.fileEncoding');
+		if (!encoding) return;
+		config.update(
+			'[daedalus]',
+			{ 'files.encoding': encoding.toLowerCase().replace('windows-', 'windows') },
+			vscode.ConfigurationTarget.Global
+		);
+	}
+}
+
+
 export function activate(context: vscode.ExtensionContext) {
 	const lspPath = path.join(context.extensionPath, 'languageserver');
 	
@@ -105,4 +131,12 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		client,
 	);
+
+	// Update file encoding and add listen for changes
+	updateFileEncoding();
+	vscode.workspace.onDidChangeConfiguration(event => {
+		if (event.affectsConfiguration('daedalusLanguageServer.fileEncoding')) {
+			updateFileEncoding();
+		}
+	});
 }
