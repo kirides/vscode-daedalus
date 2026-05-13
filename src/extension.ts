@@ -8,11 +8,18 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as os from 'os';
 import { ServerOptions, LanguageClient, LanguageClientOptions } from 'vscode-languageclient/lib/node/main'
+import type { DocumentSelector } from 'vscode-languageserver-protocol'
 import { Trace } from 'vscode-jsonrpc';
 import { log } from 'console';
 import { execFileSync } from 'child_process';
 
 const LANGUAGE: string = "daedalus";
+const DOCUMENT_SELECTOR: DocumentSelector = [
+	{ scheme: 'file', language: LANGUAGE },
+	{ scheme: 'file', pattern: '**/*.d' },
+	{ scheme: 'file', pattern: '**/*.D' }
+];
+
 interface Dictionary<T> {
     [Key: string]: T;
 }
@@ -66,6 +73,22 @@ function updateFileEncoding() {
 
 export function activate(context: vscode.ExtensionContext) {
 	const lspPath = path.join(context.extensionPath, 'languageserver');
+	const syncedDocumentVersions = new Map<string, number>();
+	let client: LanguageClient | undefined;
+
+	async function syncDocumentBeforeFeatureRequest(document: vscode.TextDocument, token: vscode.CancellationToken) {
+		if (token.isCancellationRequested || document.uri.scheme !== 'file' || !client) {
+			return;
+		}
+
+		const uri = document.uri.toString();
+		if (syncedDocumentVersions.get(uri) === document.version) {
+			return;
+		}
+
+		await client.sendNotification('textDocument/didOpen', client.code2ProtocolConverter.asOpenTextDocumentParams(document));
+		syncedDocumentVersions.set(uri, document.version);
+	}
 	
 	const lookup : Dictionary<string> = {
 		"linux-x32": 'DaedalusLanguageServer.x86',
@@ -101,16 +124,24 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Options to control the language client
 	let clientOptions: LanguageClientOptions = {
-		// Register the server for plain text documents
-		documentSelector: [
-			{ language: LANGUAGE, },
-			{ pattern: '**/*.d', },
-			{ pattern: '**/*.D', }
-		],
+		// Register the server for Daedalus documents
+		documentSelector: DOCUMENT_SELECTOR,
 		synchronize: {
 			configurationSection: 'daedalusLanguageServer',
 		},
 		middleware: {
+			async provideDocumentSemanticTokens(document, token, next) {
+				await syncDocumentBeforeFeatureRequest(document, token);
+				return next(document, token);
+			},
+			async provideDocumentRangeSemanticTokens(document, range, token, next) {
+				await syncDocumentBeforeFeatureRequest(document, token);
+				return next(document, range, token);
+			},
+			async provideInlayHints(document, viewPort, token, next) {
+				await syncDocumentBeforeFeatureRequest(document, token);
+				return next(document, viewPort, token);
+			},
 			async provideCodeLenses(document, token, next) {
 				const ret = await next(document, token);
 				ret?.map(lens => mapLensFromLspToVscode(lens));
@@ -124,12 +155,15 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 
 	// Create the language client and start the client.
-	const client = new LanguageClient('daedalusLanguageServer', 'Daedalus Language Server', serverOptions, clientOptions);
+	client = new LanguageClient('daedalusLanguageServer', 'Daedalus Language Server', serverOptions, clientOptions);
 	client.setTrace(Trace.Verbose);
 	client.start();
 
 	context.subscriptions.push(
 		client,
+		vscode.workspace.onDidCloseTextDocument(document => {
+			syncedDocumentVersions.delete(document.uri.toString());
+		}),
 	);
 
 	// Update file encoding and add listen for changes

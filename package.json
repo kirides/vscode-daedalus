@@ -12,12 +12,14 @@
   "displayName": "Daedalus (Gothic/II)",
   "homepage": "https://github.com/kirides/vscode-daedalus",
   "license": "MIT",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "engines": {
     "vscode": ">=1.97.0"
   },
-  "publisher": "Kirides",
-  "activationEvents": [],
+  "publisher": "kirides",
+  "activationEvents": [
+    "onLanguage:daedalus"
+  ],
   "contributes": {
     "configuration": {
       "type": "object",
@@ -113,8 +115,8 @@
           "daedalus"
         ],
         "extensions": [
-          "d",
-          "D"
+          ".d",
+          ".D"
         ],
         "configuration": "./language-configuration.json"
       },
@@ -125,8 +127,8 @@
           "modelscript"
         ],
         "extensions": [
-          "mds",
-          "MDS"
+          ".mds",
+          ".MDS"
         ],
         "configuration": "./language-configuration.json"
       }
