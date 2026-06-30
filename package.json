@@ -177,6 +177,6 @@
   },
   "dependencies": {
     "glob": "^11.1.0",
-    "vscode-languageclient": "^9.0.1"
+    "vscode-languageclient": "^10.0.1"
   }
 }
